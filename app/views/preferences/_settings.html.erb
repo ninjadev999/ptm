@@ -1,0 +1,85 @@
+<% onboarding = controller_name == 'account_setups' %>
+
+<div class="row row-grid">
+  <div class="col-lg-6">
+    <h2 class="text-center">Build your profile</h2>
+    <%= simple_form_for user, method: :put, class: 'no-enter-form', url: onboarding ? settings_account_setups_path : preferences_path do |f| %>
+      <%= f.input :username %>
+      <%= f.fields_for :profile, user.profile || Profile.new(user: user) do |p| %>
+        <%= f.label :bio, 'Bio', class: 'form-control-label' %>
+        <p class="text-muted text-description mb-0">Describe about yourself</p>
+        <%= p.input :bio, resize: 'none', label: false %>
+
+        <%= label_tag :photo, 'Photo', class: 'form-control-label' %>
+        <div class='mb-4 row'>
+          <div class='col-lg-6'>
+            <%= p.input :photo, as: :file, label: false, input_html: { class: 'custom-input-file' }, wrapper: false %>
+            <%= p.label :photo do  %>
+                <i class="fa fa-upload"></i>
+                <span>Choose a file…</span>
+            <% end %>
+          </div>
+          <div class='col-lg-6 my-auto'>
+            <%= render partial: 'shared/guest_avatar', locals: { guest: user, custom_size: '72x72' } %>
+          </div>
+        </div>
+
+        <%= label_tag :audio_recording, 'Audio Recording', class: 'form-control-label' %>
+        <div class='mb-4 row'>
+          <div class='col-lg-6'>
+            <%= p.input :audio_recording, as: :file, label: false, input_html: { class: 'custom-input-file' }, wrapper: false %>
+            <%= p.label :audio_recording do  %>
+                <i class="fa fa-upload"></i>
+                <span>Choose a file…</span>
+            <% end %>
+          </div>
+          <div class='col-lg-6 my-auto'>
+            <%= render partial: 'shared/guest_audio', locals: { guest: user } %>
+          </div>
+        </div>
+
+        <!-- p.autocomplete_field :primary_industry, autocomplete_profile_primary_industry_profiles_path, 
+        value: p.object.primary_industry.to_s, class: 'form-control' -->
+
+        <%= p.input :primary_industry, collection: industry_options, class: 'form-control' %>
+      <% end %>
+
+      <%= f.label :expertise_list, 'Expertises interested', class: 'form-control-label' %>
+      <p class="text-muted text-description mb-0">Add up to three areas of expertise! The more precise you are, the easier it is for show hosts to find you.</p>
+      <%= f.autocomplete_field :expertise_list, autocomplete_expertise_name_profiles_path, 
+        :value => f.object.expertise_list.to_s, :multiple => true, data: { max_tags: 3 }, placeholder: 'Acting, Coffee' %>
+
+      <%= f.label :promotion_list, 'Promotions interested', class: 'form-control-label' %>
+      <p class="text-muted text-description mb-0">Please tell us why you are wanting to be on someone’s show.  This will help give the host of the show some context on your motivations.</p>
+      <%= f.autocomplete_field :promotion_list, autocomplete_promotion_name_profiles_path, 
+        :value => f.object.promotion_list.to_s, :multiple => true, data: { max_tags: 10 } %>
+
+      <%= f.label :topic_list, 'Topics interested', class: 'form-control-label' %>
+      <p class="text-muted text-description mb-0">Enter up to 10 topics you are interested in.  Even if your not an expert, this will help hosts design their interview to help keep the conversation engaging.</p>
+      <%= f.autocomplete_field :topic_list, autocomplete_topic_name_profiles_path, 
+        :value => f.object.topic_list.to_s, :multiple => true, data: { max_tags: 10 } %>
+      
+      <%= f.submit(onboarding ? 'Continue' : 'Save', class: 'btn btn-primary mr-5') %>
+      <% if onboarding %>
+        <%= link_to 'Do it later', checkout_account_setups_path, class: 'link-inversed' %>
+      <% end %>
+    <% end %>
+
+  </div>
+  
+  <% if @profile.present? %>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="mb-3 text-center">Social Sites</h6>
+          <%= render '/preferences/social_site_form' %>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag :cocoon %>
+  <% end %>
+
+</div>
+
+
+

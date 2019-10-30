@@ -1,0 +1,67 @@
+<section class="slice slice-lg ">
+  <div class="container">
+    <div class="mb-md text-center">
+      <h3 class="heading h2 ">Select a podcast</h3>
+      <div class="fluid-paragraph mt-3">
+        <p class="lead text-white"><a class="btn btn-primary btn-rounded" href="/accounts/new">Create a new podcast</a></p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="table-responsive-lg">
+          <table class="table table-hover table-scale--hover table-cards align-items-center">
+            <thead>
+              <th></th>
+              <th>Podcast name</th>
+              <th>Upcoming interviews</th>
+              <th>Completed Interviews</th>
+              <th></th>
+            </thead>
+            <tbody>
+            <% @accounts.each do |account| %>
+            <tr class='clickable-row' data-href="<%= select_account_path(account) %>">
+              <th scope="row">
+                <%- if account.logo.attachment %>
+                 <%= image_tag account.logo.variant(resize: "72x72") %>
+                <%- end %>
+              </td>
+              <td scope="row" class="name-link">
+                <div class="media align-items-center">
+                  <div class="media-body">
+                    <%= account.name %>
+                  </div>
+                </div>
+              </td>
+              <td scope="row">
+                <%= account.interviews.upcoming.count %>
+                <%= raw("( Next: #{local_time(account.next_interview.starts_at) if account.next_interview.starts_at} )") if account.next_interview.present? %>
+              </td>
+              <td scope="row">
+                <%= account.interviews.past.count %>
+                <%= raw("( Last: #{local_time(account.previous_interview.starts_at)} )") if account.previous_interview&.completed_at.present? %>
+              </td>
+              <td>
+                <%= link_to account_path(account), class: "btn btn-secondary btn-icon-only btn-circle rounded-circle", data: { toggle: 'tooltip' }, title: 'Show profile' do %>
+                    <span class="btn-inner--icon"><i class="fa fa-eye" title='Show Profile'></i></span>
+                <% end %>
+                
+                <% if policy(account).manage_invites? %>
+                  <%= link_to new_podcast_invite_path(account_id: account.id), class: "btn btn-secondary btn-icon-only btn-circle rounded-circle", data: { toggle: 'tooltip' }, title: 'Invite users to access this show' do %>
+                    <span class="btn-inner--icon"><i class="fa fa-user-plus"></i></span>
+                  <% end if current_user.host_subscription.present? %>
+                <% end %>
+
+                <%= link_to edit_account_path(account), class: "btn btn-secondary btn-icon-only btn-circle rounded-circle", data: { toggle: 'tooltip' }, title: 'Edit profile' do %>
+                  <span class="btn-inner--icon"><i class="fa fa-pencil"></i></span>
+                <% end %>
+              </td>
+            </tr>
+            <tr class="table-divider"></tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

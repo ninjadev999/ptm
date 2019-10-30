@@ -1,0 +1,46 @@
+<div class="card">
+
+  <div class="card-header border-0">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h6 class="mb-0">Applied Interviews</h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-flush align-items-center align-items-center">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>With Remote Studio</th>
+        <th>Applied At</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @active_applicants.each do |applicant|  %>
+      <% interview = applicant.interview %>
+        <tr>
+          <td>
+            <span class="font-weight-bold text-sm">
+              <%= interview.name %>
+              </span>
+          </td>
+          <td>
+            <%= interview.needs_hardware ? 'Yes' : 'No' %>
+          </td>
+          <td>
+            <%= local_time(applicant.created_at) %>
+          </td>
+
+          <td>
+          </td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+
+</div>

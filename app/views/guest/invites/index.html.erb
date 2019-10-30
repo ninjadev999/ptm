@@ -1,0 +1,39 @@
+<section class="slice slice-lg ">
+  <div class="container">
+    <% if @invites.exists? %>
+      <div class="table-responsive-lg">
+        <table class="table table-cards align-items-center">
+          <thead>
+            <th></th>
+            <th>Interview Name</th>
+            <th>Interviewer</th>
+            <th></th>
+          </thead>
+          <tbody>
+          <% @invites.each do |invite| %>
+            <% interview = invite.interview %>
+            <tr>
+              <th scope="row">
+                <%= interview.id %>
+              </td>
+              <td scope="row" class="name-link">
+                <%= interview.name %>
+              </td>
+              <td scope="row" class="name-link">
+                <%= interview.user&.full_name %>
+              </td>
+
+            </tr>
+            <tr class="table-divider"></tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <div class='text-center mt-4'>
+        <p>No invites found!</p>
+        <p>Try to <%= link_to '<b>search</b>'.html_safe, search_interviews_path %> and apply interviews.</p>
+      </div>
+    <% end %>
+  </div>
+</div>

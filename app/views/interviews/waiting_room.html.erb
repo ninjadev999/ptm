@@ -1,0 +1,79 @@
+<% if @prep %>
+  <!-- PREP WITH HOST -->
+  <%= render 'guest_prep' %>
+<% else %>
+  <!-- WAITING ROOM -->
+  <% countdown_seconds = 30 %>
+
+  <section class="pt-5 pt-lg-0 mt-5">
+    <div class="container">
+
+      <%= render 'interviews/guests/prep_step2' %>
+
+      <div class="row">
+
+        <div class="col-lg-1 col-md-2">
+        </div>
+
+        <div class="col-lg-10 col-md-9">
+
+          <div class="card">
+
+            <div class="card-body">
+              <h3 class="mb-2">
+                <%= @interview.account.name %> &raquo; Guest Waiting Area
+              </h3>
+              <p><b><%= @interview.name %></b> is scheduled to begin at <%= safe_local_time(@interview.starts_at) %>.</p>
+
+              <h5 class="interview-title">You will automatically be connected to the interview when it begins.</h5>
+
+              <% if @interview.has_read_ahead_info? %>
+                <p>The interview <i>read ahead</i> information is provided for your convenience below.</p>
+
+                <% if !@interview.read_ahead.blank? %>
+                  <p><b>Read ahead</b></p>
+                  <div class="interview-show-content mb-3"><%= simple_format(@interview.read_ahead) %></div>
+                <% end %>
+
+                <% if @interview.read_ahead_file.attached? %>
+                  <p><b>Read ahead (attachment)</b></p>
+                  <div class="interview-show-content mb-3">
+                    <%= link_to(@interview.read_ahead_file.filename, rails_blob_path(@interview.read_ahead_file, disposition: "attachment")) %>
+                  </div>
+                <% end %>
+              <% end %>
+
+              <p><i>Interview status will automatically be checked in <span id="countdowntimer"><%= countdown_seconds %></span> seconds ...</i></p>
+
+              <%= link_to "Check Interview Status", waiting_room_path(id: @interview.code), class: 'btn btn-primary' %>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-1 col-md-2">
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script type="text/javascript">
+
+    var timeleft = <%= countdown_seconds %>;
+    var downloadTimer = setInterval(function(){
+      timeleft--;
+      document.getElementById("countdowntimer").textContent = timeleft;
+      if (timeleft <= 0) {
+        clearInterval(downloadTimer);
+        window.location = "<%= waiting_room_url(id: @interview.code) %>";
+     }
+    },1000);
+
+    // $(document).ready(function(){
+
+    // });
+
+  </script>
+
+<% end %>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pass the Mic</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= ga_js if Rails.env.production? && !staging? %>
+    <%= favicon_link_tag image_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <%= stylesheet_link_tag    'theme', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'theme', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="//media.twiliocdn.com/sdk/js/client/v1.5/twilio.min.js"></script>
+    <script src="//media.twiliocdn.com/sdk/js/video/releases/2.0.0-beta1/twilio-video.min.js"></script>
+    <script src="<%= asset_url('video_chat.es6')%>"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('<%=ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+    </script>
+  </head>
+
+  <body>
+    <%= yield %>
+    <script src="//app.helphero.co/embed/kVzUpFvgT7X"></script>
+
+    <script>     
+      <% if user_signed_in? %>
+        // important replace with variables specific to the current user
+        HelpHero.identify("<%= Rails.env %>_<%= staging? %>_<%= current_user.id %>", {
+          // OPTIONAL anything additional you want to make available for targeting
+          role: "<%= guest? ? 'guest' : 'host' %>",
+          created_at: "<%= current_user.created_at %>"
+        });
+      <% else %>
+        HelpHero.anonymous()
+      <% end %>
+    </script>
+    <%= content_for :helphero_js %>
+  </body>
+
+  <% unless hide_support_help_widgets? %>
+    <%= customer_support_js %>
+    <%= help_desk_js %>
+  <% end %>
+
+</html>

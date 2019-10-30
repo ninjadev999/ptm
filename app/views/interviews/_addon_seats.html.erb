@@ -1,0 +1,62 @@
+<div class="page-inner-header mb-4">
+    <h5 class="mb-1"><i class="fa fa-users mr-3 mb-4 mt-3"></i>Guest Addon Seats</h5>
+
+    <p class="text-muted mb-0">Please use the form below to purchase additional guest seats if this interview requires more than one guest.</p>
+
+</div>
+
+
+<%= form_tag(purchase_addon_seats_path(id: @interview.id), method: :post, id: 'payment-form') do %>
+
+  <div class="row row-grid mt-4">
+      <div class="col-md-6">
+          <div class="card">
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col-8">
+                          <div class="custom-control custom-radio">
+                              <input type="radio" name="addon_seats_count" required value='1' class="custom-control-input" id="shipping-standard">
+                              <label class="custom-control-label text-dark font-weight-bold" for="shipping-standard">One additional addon seat</label>
+                          </div>
+                      </div>
+                      <div class="col-4 text-right">
+                          <span class="h6"><%= number_to_currency(Bundle.single_addon_seat_in_dollars) %></span>
+                      </div>
+                  </div>
+                  <p class="text-muted text-sm mt-3 mb-0">You can invite 1 more guest.</p>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-6">
+          <div class="card">
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col-8">
+                          <div class="custom-control custom-radio">
+                              <input type="radio" name="addon_seats_count" required value='2' class="custom-control-input" id="shipping-fast">
+                              <label class="custom-control-label text-dark font-weight-bold" for="shipping-fast">Two additional addon seats</label>
+                          </div>
+                      </div>
+                      <div class="col-4 text-right">
+                          <span class="h6"><%= number_to_currency(Bundle.two_addon_seats_in_dollars) %></span>
+                      </div>
+                  </div>
+                  <p class="text-muted text-sm mt-3 mb-0">You can invite 2 more guest.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class='mt-5'>
+    <%= render partial: 'checkout/card_info' %>
+  </div>
+
+  <div class="mt-5 text-right">
+    <button type="submit" class="btn btn-sm btn-primary">
+      <i class="fa fa-shopping-cart mr-2 mb-2 mt-1"></i> Purchase Addon Seat(s)
+    </button>
+  </div>
+<% end %>
+
+
+<%= javascript_include_tag 'checkout', 'data-turbolinks-track': 'reload' %>
+

@@ -1,0 +1,17 @@
+<div class='content'>
+  <div class='content-inside'>
+    <% if current_user.present? %>
+      <%= render (guest? ? 'layouts/guest/header' : 'layouts/app/header') %>
+    <% else %>
+      <%= render 'layouts/theme/header' %>
+    <% end %>
+    <main>
+      <%= render_flash %>
+      <%= yield  %>
+    </main>
+  </div>
+  
+</div>
+<%= render 'layouts/app/footer' %>
+
+<% parent_layout 'theme' %>

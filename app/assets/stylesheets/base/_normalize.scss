@@ -1,0 +1,73 @@
+tr[data-link]:hover { cursor: pointer; }
+
+#card-element {
+  clear: both;
+  border-radius: 1em;
+  border: 1px solid #e6e6e6;
+  background-color: #f2f2f2;
+  padding: 1.2em 2em 2em 2em;
+}
+
+footer {
+  background-color: #7c0101;
+}
+
+.alert {
+	margin-bottom: 0;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.even-smaller {
+  font-size: 70%;
+}
+
+.bigger-10 {
+  font-size: 110%;
+}
+
+.bigger-20 {
+  font-size: 120%;
+}
+
+.medium-icon {
+  font-size: 2rem;
+}
+
+.table-fixed {
+  table-layout: fixed;
+}
+
+table {
+  th, td {
+    overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+  }
+}
+
+.badge-confirmed {
+    color: #16c333;
+    background-color: #dff8e4;
+}
+.badge-invited {
+    color: #0090d2;
+    background-color: #d3f0fe;
+}
+.badge-declined {
+    color: #b36800;
+    background-color: #ffdfb3;
+}
+.link-inversed {
+  text-decoration: underline;
+}
+
+.text-description {
+  font-size: $font-size-bigger;
+}
+
+img.rounded-border {
+  border-radius: 50px;
+}

@@ -1,0 +1,27 @@
+<section class="slice">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 mt-lg-3">
+        <div class='float-right'>
+          <%= link_to accounts_path, class: "btn btn-secondary btn-icon" do %>
+              <span class="btn-inner--icon"><i class="fa fa-arrow-left"></i></span>
+              <span class="btn-inner--text">Back To Podcasts View</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-6 mt-lg-6">
+        <div class="d-flex justify-content-center">
+          <%= render partial: '/accounts/show_form' %>
+          <div class="profile-card-edit-icon">
+            <%= link_to edit_account_path(@account), class: "btn btn-secondary btn-icon-only btn-circle rounded-circle" do %>
+                <span class="btn-inner--icon"><i class="fa fa-pencil"></i></span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mt-lg-3 mb-3">
+      </div>
+    </div>
+  </div>
+</section>
+

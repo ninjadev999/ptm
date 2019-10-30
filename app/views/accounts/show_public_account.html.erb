@@ -1,0 +1,19 @@
+<section class="slice">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 mt-lg-4"></div>
+      <div class="col-md-6 mt-lg-6">
+        <div class="d-flex justify-content-center">
+          <% if @account.present? %>
+            <%= render partial: '/accounts/show_form' %>
+          <% else %>
+            Not found account
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-3 mt-lg-4 mb-4">
+      </div>
+    </div>
+  </div>
+</section>
+

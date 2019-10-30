@@ -1,0 +1,91 @@
+section.pt-5.pt-lg-0
+  .container.slice
+    .card
+      .card-body
+        .row
+          .col
+            h2.interview-name
+              i.fa.fa-microphone.mr-3
+              = @interview.name
+          .col
+            .float-right
+              a.btn.btn-danger.mb-4 data-confirm="Are you sure? This can't be undone." data-method="delete" href="#{interview_path(@interview)}"
+                | Delete interview
+        .row
+          .col-md-8.mt-3
+            .container.interview-details.mb-4
+              .row
+                .col
+                  | Interview Completed on:
+                .col
+                   = local_time(@interview.completed_at)
+              .row
+                .col
+                  | Podcast:
+                .col
+                  = @interview.account.name
+              .row
+                .col
+                  | Days remaining to download media files:
+                .col
+                  span data-toggle="tooltip" title="Days this interview available on PTM"
+                    = @interview.interview_lifespan
+                    |  days remaining
+            - @interview.invites.each do |invite|
+              = render partial: 'shared/invite', locals: { invite: invite }
+
+          .col-md-4.mt-lg-5.mb-5.download-btn-group
+            - unless @interview.read_ahead_file.attachment.nil?
+              = link_to rails_blob_path(@interview.read_ahead_file.blob, disposition: :attachment), class: "btn btn-info btn-sm download-btn" do
+                b Download
+                br
+                span.bigger-20 Read Ahead
+            - unless @interview.auto_transcription.attachment.nil?
+              a.btn.download-btn href="#{@interview.auto_transcription.blob.service_url}"
+                b Download
+                br
+                | Auto Transcription
+            - if @interview.compositions.any?
+              .media-type-heading Combined Audio
+              - @interview.compositions.each do |comp|
+                - if comp.wav.attached?
+                  = link_to rails_blob_path(comp.wav, disposition: :attachment), class: "btn btn-info btn-sm download-btn" do
+                    b Download
+                    br
+                    span.bigger-10 Complete Interview Audio (WAV)
+                - if comp.mp3.attached?
+                    = link_to rails_blob_path(comp.mp3, disposition: :attachment), class: "btn btn-info btn-sm download-btn" do
+                      b Download
+                      br
+                      span.bigger-10 Complete Interview Audio (MP3)
+
+            - if @interview.audio_medias.any?
+              .recording-type-heading Single Participant Audio Files
+
+              - @interview.audio_recordings.each do |r|
+                - next if r.medias.empty?
+                - r.medias.each do |media|
+                  = link_to rails_blob_path(media, disposition: :attachment), class: "btn btn-info btn-sm download-btn" do
+                    b Download
+                    br
+                    span.bigger-10 = media_download_desc(r, media)
+
+            - if @interview.video_medias.any?
+              .recording-type-heading Single Participant Video Files
+
+              - @interview.video_recordings.each do |r|
+                - next if r.medias.empty?
+                - r.medias.each do |media|
+                  = link_to rails_blob_path(media, disposition: :attachment), class: "btn btn-info btn-sm download-btn" do
+                    b Download
+                    br
+                    span.bigger-10 = media_download_desc(r, media)
+
+    - if @guests.any?
+      .row.header-row
+        .col
+          h3.text-center Recommended guests for future interviews:
+      .row.justify-content-md-center
+        - @guests.each do |guest|
+          .mini-guest-profile
+            = render partial: 'guest/profiles/profile_sm', locals: { user: guest }

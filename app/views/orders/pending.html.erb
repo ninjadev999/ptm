@@ -1,0 +1,23 @@
+<section class="pt-5 pt-lg-0 bg-secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mt-lg-5 mb-5">
+        <div class="card">
+          <div class="card-body">
+            <div class="">
+              <h5><i class="far fa-user mr-2 mb-4"></i>Confirm your order</h5>
+              <p>We'll be sending <strong>1 microphone</strong> to the following address:</p>
+              <h5><%= @order.address.name %></h5>
+              <address>
+                <%= @order.address.street1 %><br/>
+                <% if @order.address.street2.present? %><%= @order.address.street2 %><br/><% end %>
+                <%= @order.address.city %>, <%= @order.address.state %> <%= @order.address.zip %>
+              </address>
+              <a href="/orders/<%= @order.to_param %>/edit">Change order</a> or <a href="/orders/<%=@order.to_param %>" data-remote="true" data-params='order[confirm]=1' data-method="put">Confirm order</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

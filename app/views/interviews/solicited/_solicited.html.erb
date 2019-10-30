@@ -1,0 +1,22 @@
+
+<%= f.input :ideal_guest_desc, label: 'Please describe your ideal podcaster for this interview.' %>
+
+<%= f.label :topic_list, 'What is the topic of the interview?', class: 'form-control-label' %>
+<p class="text-muted text-description mb-0">Add up to 10 topics. This will affect to your guest search.</p>
+<%= f.autocomplete_field :topic_list, autocomplete_topic_name_profiles_path, 
+  :value => f.object.topic_list.to_s, :multiple => true, data: { max_tags: 10 } %>
+
+<%= f.label :expertise_list, 'What expertise should your ideal podcaster be capable of offering?', class: 'form-control-label' %>
+<p class="text-muted text-description mb-0">Add up to 10 expertises. This will affect to your guest search.</p>
+<%= f.autocomplete_field :expertise_list, autocomplete_expertise_name_profiles_path, 
+  :value => f.object.expertise_list.to_s, :multiple => true, data: { max_tags: 10 } %>
+
+<%= f.label :promotion_list, 'What would you like to promote during this interview?', class: 'form-control-label' %>
+<p class="text-muted text-description mb-0">Add up to 10 promotions. This will affect to your guest search.</p>
+<%= f.autocomplete_field :promotion_list, autocomplete_promotion_name_profiles_path, 
+  :value => f.object.promotion_list.to_s, :multiple => true, data: { max_tags: 10 } %>
+
+<% # f.input :category_id, label: 'How would you categorize the topic of this interview?' %>
+
+<%= f.input :ideal_listener_action, label: 'What action from listeners do you hope to see as a result from listening to this this interview?' %>
+<%= f.hidden_field :state, value: :waiting %>

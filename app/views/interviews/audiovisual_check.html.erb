@@ -1,0 +1,51 @@
+<section class="pt-5 pt-lg-0 mt-5">
+
+  <div class="container">
+
+    <%= render 'interviews/guests/prep_step1' %>
+
+    <div class="row">
+
+      <div class="col-lg-1 col-md-1">
+      </div>
+
+      <div class="col-lg-10 col-md-10 col-sm-12">
+
+        <div class="card">
+
+          <div class="card-body">
+
+            <h3 class="mb-2">Test Webcam and Mic Connectivity</h3>
+
+            <p><b> <%= @interview.account.name %> &raquo; <%= @interview.name %></b> is scheduled to begin at <%= safe_local_time(@interview.starts_at) %>.</p>
+
+            <% if @interview.has_read_ahead_info? %>
+              <p>The interview <i>read ahead</i> information is provided for your convenience below.</p>
+
+              <% if !@interview.read_ahead.blank? %>
+                <p><b>Read ahead</b></p>
+                <div class="interview-show-content mb-3"><%= simple_format(@interview.read_ahead) %></div>
+              <% end %>
+
+              <% if @interview.read_ahead_file.attached? %>
+                <p><b>Read ahead (attachment)</b></p>
+                <div class="interview-show-content mb-3">
+                  <%= link_to(@interview.read_ahead_file.filename, rails_blob_path(@interview.read_ahead_file, disposition: "attachment")) %>
+                </div>
+              <% end %>
+            <% end %>
+
+            <%= render 'audiovisual_common' %>
+
+            <%= link_to raw("Continue &raquo;"), waiting_room_path(id: @interview.code), class: 'btn btn-primary' %>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-1 col-md-1">
+      </div>
+
+    </div>
+  </div>
+</section>

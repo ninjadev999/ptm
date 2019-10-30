@@ -1,0 +1,35 @@
+<% if charges.empty? %>
+  <p class="text-center">You have no billing history.</p>
+<% else %>
+  <div class="table-responsive-lg">
+    <table class="table table-cards align-items-center">
+      <thead>
+        <th></th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th></th>
+      </thead>
+      <tbody>
+      <% charges.each do |charge| %>
+      <tr>
+        <th scope="row">
+          <%= charge.description || 'Charge' %>
+        </td>
+        <td scope="row" class="name-link">
+          <%= local_time(DateTime.strptime(charge.created.to_s,'%s')) %>
+        </td>
+        <td scope="row" class="name-link">
+          <%= Money.new(charge.amount, "USD").format %>
+        </td>
+        <td scope="row">
+          <%= charge.status %>
+        </td>
+      </tr>
+      <tr class="table-divider"></tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<% end %>

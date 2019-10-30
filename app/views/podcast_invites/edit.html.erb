@@ -1,0 +1,21 @@
+<div class="media align-items-center">
+  <div class="media-body">
+
+    <h5 class="mb-5 text-center"><%= @podcast_invite.account.admin.full_name %> invites you as an admin to <%=@podcast_invite.account.name%>!</h3>
+
+  </div>
+</div>
+
+<div class="media align-items-center mb-5">
+  <div class="media-body text-center">
+    <div class='mx-auto'>
+      <% unless @podcast_invite.declined? %>
+        <p class='text-center'>Confirm to join the PTM network and manage the interviews.</p>
+          <% unless @podcast_invite.confirmed? %>
+              <%= link_to "Confirm", confirm_podcast_invite_path(@podcast_invite.code), method: :put, class: 'btn btn-sm btn-outline-success pr-3' %>
+          <% end %>
+          <%= link_to "Decline", decline_podcast_invite_path(@podcast_invite.code, redirect_url: edit_podcast_invite_path(@podcast_invite.code)), method: :put, class: 'btn btn-sm btn-outline-danger' %>
+      <% end %>
+    </div>
+  </div>
+</div>

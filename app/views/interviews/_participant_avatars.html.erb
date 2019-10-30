@@ -1,0 +1,10 @@
+<div class="participants_avatar_group">
+    <%= render partial: '/accounts/account_avatar', locals: { account: interview.account, custom_class: "participant_avatar" } %>
+    <% unless interview.invites.empty? %>
+        <% interview.invites.order(:id).each do |invite| %>
+            <% unless invite.guest.nil? %>
+                <%= render partial: 'shared/guest_avatar', locals: { guest: invite.guest, custom_class: "participant_avatar" } %>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>

@@ -1,0 +1,59 @@
+<section class="pt-5 pt-lg-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mt-lg-5">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="interview-name mb-2">
+              <i class="fa fa-microphone mr-3 mb-4"></i><%= @interview.name %>
+              <a href="<%= edit_interview_path(@interview) %>"><i class="fa fa-edit float-right"></i></a>
+            </h2>
+            <h5 class="interview-title"><i class="fa fa-calendar mr-3 mb-4"></i><%= interview_title(@interview) %></h5>
+
+            <div class="row remote-studio-info">
+              <div class="container-fluid">
+                <div class="interview-show-label ml-3 mb-1">Read ahead</div>
+                <div class="interview-show-content mb-3">
+                  <% if @interview.read_ahead.blank? %>
+                    (none specified)
+                  <% else %>
+                    <%= simple_format(@interview.read_ahead) %>
+                  <% end %>
+                </div>
+
+                <div class="interview-show-label ml-3 mb-1">Read ahead file attachment</div>
+                <div class="interview-show-content mb-3">
+                  <% if @interview.read_ahead_file.attached? %>
+                    <%= link_to(@interview.read_ahead_file.filename, rails_blob_path(@interview.read_ahead_file, disposition: "attachment")) %>
+                  <% else %>
+                    (no file attached)
+                  <% end %>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-lg-5 mb-5">
+        <% if @interview.account.present? # Because as a host, we don't want to display this for solicited interview %>
+        <div>
+          <a class="btn btn-info mb-4 btn-translate--hover" href="<%= live_interview_url(id: @interview.code) %>">Start interview</a>
+          <a class="btn btn-danger mb-4 btn-translate--hover" data-confirm="Are you sure? This can't be undone." data-method="delete" href="/interviews/<%= @interview.to_param %>">Cancel interview</a>
+        </div>
+        <% end %>
+
+        <div class="mb-3">
+          <div class="card">
+              <div class="card-body">
+                <% if @interview.guest == current_user %>
+                  <%= render partial: 'interviews/solicited/podcasters' %>
+                <% end %>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

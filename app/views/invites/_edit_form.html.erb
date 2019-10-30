@@ -1,0 +1,18 @@
+<%= simple_form_for @invite, {url: invite_path(@invite.code)} do |f| %>
+
+  <%= f.input :name %>
+  <%= f.input :email %>
+
+  <h3>Shipping Address</h3>
+
+  <p>This is normally only required if the host has selected the <i>remote studio hardware</i> option.</p>
+
+  <%= f.input :address_line1 %>
+  <%= f.input :address_line2 %>
+  <%= f.input :city %>
+  <%= f.input :state, collection: CS.get(:us).keys, prompt: "(select state)" %>
+  <%= f.input :zip_code %>
+
+  <%= f.submit("Update My Info", {class: 'btn btn-primary float-left mr-2'}) %>
+
+<% end %>

@@ -1,0 +1,5 @@
+<%= simple_form_for @order, url: "/order_wizards/#{@order.to_param}" do |f| %>
+  <%= f.input :name, hint: "Person you are interviewing" %>
+  <%= f.input :company, hint: "Some other identifier" %>
+  <%= f.submit "Next step" %>
+<% end %>

@@ -1,0 +1,57 @@
+<% link_method = local_assigns[:link_method] || :select_plan_account_setups_path %>
+
+<% if link_method == :preferences_plans_path %>
+    <p class='text-center'>Change your subscription plan.</p>
+<% end %>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-pricing text-center px-3 mb-4 z-depth-3 <%= 'popular' if local_assigns[:current].nil? %>">
+            <div class="card-header py-4">
+                <h5 class="mb-4">Free</h5>
+                <h1 class="display-5 text-primary text-center">$0</h1>
+                <span class="h6 text-muted">per month</span>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-4">
+                    <li>build a profile page</li>
+                    <li>accept invitations</li>
+                </ul>
+                <%= link_to 'Choose plan', send(link_method), class: "btn btn-primary mb-3 #{'disabled' if local_assigns[:current].nil? && link_method == :preferences_plans_path}", method: :put %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-pricing text-center px-3 mb-4 z-depth-3 <%= 'popular' if Plan.basic_plan.id == local_assigns[:current] %>">
+            <div class="card-header py-4">
+                <h5 class="mb-4">Starter</h5>
+                <h1 class="display-5 text-primary text-center"><%= Plan.basic_plan.amount_str %></h1>
+                <span class="h6 text-muted">per month</span>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-4">
+                    <li>build a profile page</li>
+                    <li>enter searchable DB</li>
+                </ul>
+                <%= link_to 'Choose plan', send(link_method, plan: Plan.basic_plan.id), class: "btn btn-primary mb-3 #{'disabled' if Plan.basic_plan.id == local_assigns[:current] && link_method == :preferences_plans_path}", method: :put %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-pricing text-center px-3 mb-4 z-depth-3 <%= 'popular' if Plan.pro_plan.id == local_assigns[:current] %>">
+            <div class="card-header py-4">
+                <h5 class="mb-4">Professional</h5>
+                <h1 class="display-5 text-primary text-center"><%= Plan.pro_plan.amount_str %></h1>
+                <span class="h6 text-muted">per month</span>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-4">
+                    <li>build a profile page</li>
+                    <li>enter searchable DB</li>
+                    <li>offered up to podcasters</li>
+                </ul>
+                <%= link_to 'Choose plan', send(link_method, plan: Plan.pro_plan.id), class: "btn btn-primary mb-3 #{'disabled' if Plan.pro_plan.id == local_assigns[:current] && link_method == :preferences_plans_path}", method: :put %>
+            </div>
+        </div>
+    </div>
+</div>

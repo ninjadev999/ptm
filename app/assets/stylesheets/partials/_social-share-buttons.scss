@@ -1,0 +1,19 @@
+$size: 30px;
+
+.social-share-button {
+  margin-top: 1.35rem;
+  display: inline-block;
+}
+
+.social-share-button {
+  .ssb-icon {
+    background-size: $size $size !important;
+    height: $size!important;
+    width: $size!important;
+    margin: 0px 8px;
+  }
+}
+
+.social-share-actions {
+  //display: none;
+}

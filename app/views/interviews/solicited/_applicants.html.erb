@@ -1,0 +1,65 @@
+<section class="slice">
+  <div class="container">
+    <div class="mb-md text-center">
+      <h3 class="heading h2 ">
+        Applicants
+        <div class='float-right'>
+          <%= link_to interview_path(@interview, _t: Time.now.to_i, _a: 'applicants', anchor: 'applicants'), class: "btn btn-secondary btn-icon-only btn-circle rounded-circle" do %>
+              <span class="btn-inner--icon"><i class="fa fa-refresh"></i></span>
+          <% end %>
+        </div>
+      </h3>
+      <div class="fluid-paragraph mt-3">
+        <p class="lead ">Here's podcasters who have applied to this interview.</p>
+      </div>
+    </div>
+    <div class="row row-grid">
+
+      <div class="col-lg-12">
+
+        <div class="card">
+
+          <% if applicants.exists? %>
+            <div class="table-responsive">
+              <table class="table table-sm table-flush table-fixed align-items-center">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Photo</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% applicants.each do |applicant|  %>
+                  <% account = applicant.account %>
+                  <tr>
+                    <td>
+                      <span class="font-weight-bold text-sm">
+                        <%= account.name %>
+                        </span>
+                    </td>
+                    <td>
+                      <%- if account.logo.attachment %>
+                       <%= image_tag account.logo.variant(resize: "72x72"), class: 'avatar avatar-lg mr-3' %>
+                      <%- end %>
+                    </td>
+                    <td>
+                      <%= link_to 'Invite', interview_account_invite_path(interview_id: @interview.id, account_id: account.id, redirect_url: interview_path(@interview, anchor: 'applicants')), method: :post, class: 'btn btn-primary' %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class='text-center mt-4'>
+              <p>No applicants found!</p>
+              <p>Try to adjust interview options or wait for podcasters apply.</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>

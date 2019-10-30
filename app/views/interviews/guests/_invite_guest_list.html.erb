@@ -1,0 +1,41 @@
+<% redirect_url = local_assigns[:redirect_url] || interview_guests_path(@interview) %>
+<% if @guests.exists? %>
+  <div class="table-responsive">
+    <table class="table table-sm table-fixed table-flush align-items-center align-items-center">
+      <thead>
+      <tr>
+        <th style="width: 20%">Name</th>
+        <th style="width: 25%">Photo</th>
+        <th style="width: 30%">Primary Industry</th>
+        <th style="width: 20%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @guests.each do |guest|  %>
+        <tr>
+          <td>
+            <span class="font-weight-bold text-sm">
+              <%= link_to guest.full_name, guest_path(guest) %>
+              </span>
+          </td>
+          <td>
+            <%= render partial: 'shared/guest_avatar', locals: { guest: guest } %>
+
+          </td>
+          <td>
+            <%= guest.profile&.primary_industry %>
+          </td>
+          <td>
+            <%= link_to 'Invite', interview_guest_invite_path(interview_id: @interview.id, guest_id: guest.id, redirect_url: redirect_url), method: :post, class: 'btn btn-primary mr-2' %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class='text-center mt-4'>
+    <p>No matching profiles found!</p>
+    <p>Try to adjust interview options or wait for guests apply.</p>
+  </div>
+<% end %>

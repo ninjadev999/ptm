@@ -1,0 +1,172 @@
+<% if @interview.ended? %>
+<h5>This interview has concluded.</h5>
+  <% if @interview.user == current_user %>
+    <a href="/interviews/<%=@interview.id %>">View details</a>
+    <% end %>
+  <% else %>
+<script src="//media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
+<script src="//media.twiliocdn.com/sdk/js/video/releases/1.0.0-beta5/twilio-video.js"></script>
+<style>
+  .room-live { display: none !important; }
+</style>
+
+<section class="slice slice-lg pt-lg-5">
+  <div class="container">
+
+    <div class="text-center">
+
+      <form id="identity-form">
+        <input type="submit" value="Join room" data-disable-with="Joining..." />
+      </form>
+
+    </div>
+    <% if current_user.try(:id) == @interview.user_id %>
+      <div class="card bg-gradient-warning border-0 shadow mb-4 room-live">
+        <div class="card-body py-3">
+          <div class="row row-grid align-items-center">
+            <div class="col-lg-8">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <h5 class="text-white mb-0"><%= @interview.name %></h5>
+                  <span class="text-white">Link to intreview</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto flex-fill mt-4 mt-sm-0 text-sm-right d-none d-lg-block">
+              <a href="/interviews/<%= @interview.id %>" data-remote="true" data-params="interview[completed]=true" data-method="put" data-disable-with="Stopping..." class="btn btn-sm btn-white btn-circle btn-icon shadow">
+                <span class="btn-inner--text">Stop interview</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="row row-grid room-live" id="">
+      <div class="col-lg-6">
+        <div class="card bg-dark opacity-container text-white overflow-hidden shadow border-0">
+          <div id="local-media"></div>
+        </div>
+        <h5>You</h5>
+      </div>
+      <div class="col-lg-6">
+        <div class="card bg-dark opacity-container text-white overflow-hidden shadow border-0">
+          <div id="remote-media"></div>
+        </div>
+        <% if user_signed_in? %>
+        <h5>Interviewee</h5>
+        <% else %>
+        <h5>Host</h5>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+
+    function attachTracks(tracks, container) {
+        console.log('attaching tracks', tracks);
+        tracks.forEach(function(track) {
+            container.appendChild(track.attach());
+        });
+    }
+
+    function attachParticipantTracks(participant, container) {
+        var name = participant.name;
+        var tracks = Array.from(participant.tracks.values());
+        attachTracks(tracks, container, name);
+    }
+
+    function detachTracks(tracks) {
+        tracks.forEach(function(track) {
+            track.detach().forEach(function(detachedElement) {
+                detachedElement.remove();
+            });
+        });
+    }
+
+    function detachParticipantTracks(participant) {
+        var tracks = Array.from(participant.tracks.values());
+        detachTracks(tracks);
+    }
+
+
+
+    var identity = {};
+    $('#identity-form').on('submit', function(e) {
+        e.preventDefault();
+        $(this).find('input[type=submit]').val("Joining...").attr('disabled', 'true')
+        Rails.ajax({
+            url: '/interviews/<%=@interview.code %>/participants',
+            type: "POST",
+            dataType: "JSON",
+            success: function(data) {
+                identity = data;
+                join_room();
+                $('#identity-form').hide();
+            },
+            error: function() {
+                alert("error")
+            }
+        });
+        return false;
+    })
+
+    function join_room() {
+        var connectOptions = { name: "<%= @interview.unique_name %>", logLevel: 'debug' };
+        Twilio.Video.connect(identity.token, connectOptions).then(roomJoined, function(error) {
+            console.log('Could not connect to Twilio: ' + error.message);
+        });
+    }
+    // Successfully connected!
+    function roomJoined(room) {
+        $('.room-live').removeClass('room-live');
+        activeRoom = room;
+        var previewContainer = document.getElementById('local-media');
+        if (!previewContainer.querySelector('video')) {
+            attachParticipantTracks(room.localParticipant, previewContainer);
+        }
+
+        room.participants.forEach(function(participant) {
+            console.log("Already in Room: '" + participant.identity + "'");
+            var previewContainer = document.getElementById('remote-media');
+            attachParticipantTracks(participant, previewContainer);
+        });
+
+        // When a participant joins, draw their video on screen
+        room.on('participantConnected', function(participant) {
+            console.log("Joining: '" + participant.identity + "'");
+        });
+
+        room.on('trackAdded', function(track, participant) {
+            console.log(participant.identity + " added track: " + track.kind);
+            var previewContainer = document.getElementById('remote-media');
+            attachTracks([track], previewContainer);
+        });
+
+        room.on('trackRemoved', function(track, participant) {
+            console.log(participant.identity + " removed track: " + track.kind);
+            detachTracks([track]);
+        });
+
+        // When a participant disconnects, note in log
+        room.on('participantDisconnected', function(participant) {
+            console.log("Participant '" + participant.identity + "' left the room");
+            detachParticipantTracks(participant);
+        });
+
+        // When we are disconnected, stop capturing local video
+        // Also remove media for all remote participants
+        room.on('disconnected', function() {
+            console.log('Left');
+            detachParticipantTracks(room.localParticipant);
+            room.participants.forEach(detachParticipantTracks);
+        });
+
+        room.on('deleted', function() {
+           alert('yes')
+        });
+    }
+</script>
+<% end %>

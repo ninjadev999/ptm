@@ -1,0 +1,21 @@
+<%- if @my_room %>
+  <%= render "my_live_room" %>
+<%- else %>
+  <%= render "guest_live_room" %>
+<%- end %>
+
+<script>
+  $(function(){
+    let accessToken = '<%= @access_token %>'
+    let roomName = '<%= @interview.code %>'
+    let audio_video_option = '<%= @interview.account.audio_visual_download_options %>'
+    let chat = new VideoChat(accessToken, roomName, audio_video_option)
+    chat.toggleJoinLeaveButton(true)
+
+    // These are MAX values (up to supported resolution of user webcam)
+    window.VIDEO_WIDTH = <%= @interview.video_width %>;
+    window.VIDEO_HEIGHT= <%= @interview.video_height %>;
+    window.INTERVIEW_CODE = "<%= @interview.code %>";
+
+  });
+</script>

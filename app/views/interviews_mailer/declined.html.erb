@@ -1,0 +1,8 @@
+<h5>Hi <%= @interview.user.first_name %></h5>
+<p>
+  <%= @invite.name %> has <b>declined</b> your request to be interviewed on your show <i><%= @interview.name %></i> on <%= datetime_readable(@interview.starts_at_in_account_time_zone) %>.
+</p>
+
+<br><br>
+Thanks,<br>
+Pass the Mic

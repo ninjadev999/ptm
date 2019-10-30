@@ -1,0 +1,10 @@
+<% if current_account.present? %>
+	<%= link_to 'Show Profile', account_path(current_account), class: 'dropdown-item' %>
+  <div class="dropdown-divider"></div>
+<% end %>
+
+<% if current_user.guest? %>
+  <%= link_to 'Guest Profile', switch_roles_path, method: :post, class: 'dropdown-item' %>
+<% else %>
+  <a class="dropdown-item" href="<%= choose_plan_account_setups_path %>">Become a PTM Guest</a>
+<% end %>

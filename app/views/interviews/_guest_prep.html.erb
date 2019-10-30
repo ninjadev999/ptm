@@ -1,0 +1,31 @@
+
+
+<section class="pt-5 pt-lg-0 mt-5">
+  <div class="container">
+    <%= render 'interviews/guests/prep_step2' %>
+  </div>
+</section>
+
+<div  style="float: right; margin-right: 12em; margin-top: 2em;">
+  <a href="<%= live_interview_path(@interview.code) %>" class="btn btn-primary">Go to LIVE Interview Room</a>
+</div>
+<div style="clear: both;"></div>
+
+<%= render "guest_live_room" %>
+
+<script>
+  $(function(){
+
+    window.INTERVIEW_ID = <%= @interview.id %>;
+    window.INTERVIEW_CODE = "<%= @interview.code %>";
+    // These are MAX values (up to supported resolution of user webcam)
+    window.VIDEO_WIDTH = <%= @interview.video_width %>;
+    window.VIDEO_HEIGHT= <%= @interview.video_height %>;
+
+    $.getJSON( "/interviews/" + window.INTERVIEW_CODE + "/prep", function( data ) {
+      var chat = new VideoChat(data.access_token, data.room_name, data.interview.audio_visual_download_options);
+      chat.toggleJoinLeaveButton(true)
+    });
+
+  });
+</script>

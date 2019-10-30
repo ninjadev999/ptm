@@ -1,0 +1,7 @@
+<% if expertises.present? %>
+  <div class="row remote-studio-info">
+    <div class="container-fluid">
+      <%= render partial: 'interviews/see_detail/items', locals: {items: expertises, badge_type: 'danger'} %>
+    </div>
+  </div>
+<% end %>

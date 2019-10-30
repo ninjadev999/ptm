@@ -1,0 +1,28 @@
+<section class="slice">
+  <div class="container">
+    <div class="mb-md text-center">
+      <h3 class="heading h2 ">Search interviews</h3>
+      <div class="fluid-paragraph mt-3">
+        <% if current_user.guest_subscription.present? %>
+          <p class="lead ">Here's all interviews.</p>
+        <% else %>
+          <p class="lead ">Here's interviews that match your profile.</p>
+        <% end %>
+      </div>
+    </div>
+
+    <%= render partial: 'filter_condition' %>
+
+    <div class='interview-list'>
+      <% if @interviews.exists? %>
+        <%= render partial: 'interview', collection: @interviews %>
+      <% else %>
+        <div class='text-center mt-4'>
+          <p>No matching interviews found!</p>
+          <p>Try to adjust account settings or wait for new postings.</p>
+        </div>
+      <% end %>
+    </div>
+    
+  </div>
+</section>

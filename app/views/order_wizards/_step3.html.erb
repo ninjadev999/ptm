@@ -1,0 +1,63 @@
+<%= simple_form_for @order, url: "/order_wizards/#{@order.id}", method: :put do |f| %>
+  <%= f.simple_fields_for :address_attributes, @order.address do |ff| %>
+    <%= ff.input :name, label: "Delivery name", required: true %>
+    <div class="row align-items-center">
+      <div class="col-md-9">
+        <%= ff.input :street1, label: "Address line 1", required: true %>
+      </div>
+      <div class="col-md-3">
+        <%= ff.input :street2, label: "Address line 2" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <%= ff.input :city, required: true %>
+      </div>
+      <div class="col-md-4">
+        <%= ff.input :state, required: true %>
+      </div>
+      <div class="col-md-4">
+        <%= ff.input :zip, label: "Postal code", required: true %>
+      </div>
+    </div>
+  <% end %>
+  <%= f.submit "Next step" %>
+<% end %>
+
+
+<script>
+    var componentForm = {
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    var componentToForm = {
+        locality: 'order_address_attributes_city',
+        administrative_area_level_1: 'order_address_attributes_state',
+        postal_code: 'order_address_attributes_zip',
+    }
+
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete((document.getElementById('order_address_attributes_street1')), {types: ['geocode']});
+        autocomplete.addListener('place_changed', fillInAddress);
+    }
+
+    function fillInAddress() {
+        var place = autocomplete.getPlace();
+        document.getElementById('order_address_attributes_street1').value = document.getElementById('order_address_attributes_street1').value.split(",")[0];
+        for (var i = 0; i < place.address_components.length; i++) {
+            var addressType = place.address_components[i].types[0];
+            if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                var el = componentToForm[addressType];
+                if(el) {
+                    document.getElementById(el).value = val;
+                }
+            }
+        }
+
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZR_qFC8JihvFU-MPCCZMti34gE-Qciok&libraries=places&callback=initAutocomplete" async defer></script>

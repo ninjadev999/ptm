@@ -1,0 +1,74 @@
+<section class="pt-5 pt-lg-0">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-3 mt-lg-5">
+        <div class='float-left'>
+          <%= link_to back_path, class: "btn btn-secondary btn-icon" do %>
+              <span class="btn-inner--icon"><i class="fa fa-arrow-left"></i></span>
+              <span class="btn-inner--text"><%= back_title %></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-7 mt-lg-5 mb-lg-5">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-2 col-xs-2">
+                <h2 class="interview-name"><i class="fa fa-microphone mr-3"></i></h2>
+              </div>
+              <div class="col-sm-10 col-xs-10">
+                <h2><%= @interview.guest_solicited? ? @interview.guest.full_name : @interview.account.name %> : <%= @interview.name %></h2>
+              </div>
+            </div>
+            
+            <h5 class="interview-title my-4"><i class="fa fa-calendar mr-3"></i><%= interview_title(@interview) %></h5>
+            
+            <%= render partial: 'interviews/see_detail/topics', locals: { topics: @interview.topic_list } %>
+            <%= render partial: 'interviews/see_detail/promotions', locals: { promotions: @interview.promotion_list } %>
+            <%= render partial: 'interviews/see_detail/expertises', locals: { expertises: @interview.expertise_list } %>
+
+            <% if @interview.ideal_guest_desc.present? %>
+              <div class="pt-3 mt-3">
+                  <!-- Resume timeline -->
+                  <h6><i class="fa fa-user mr-2 mb-4"></i>Ideal Guests</h6>
+                  <p><%= @interview.ideal_guest_desc %></p>
+              </div>
+            <% end %>
+            <% if @interview.ideal_listener_action.present? %>
+              <div class="pt-3 mt-3">
+                  <!-- Resume timeline -->
+                  <h6><i class="fa fa-trophy mr-2 mb-4"></i>Ideal Listener Action</h6>
+                  <p><%= @interview.ideal_listener_action %></p>
+              </div>
+            <% end %>
+            <% if @interview.read_ahead.present? %>
+              <div class="pt-3 mt-3">
+                <h6><i class="fa fa-book mr-2 mb-4"></i>Read ahead</h6>
+                <%= simple_format(@interview.read_ahead) %>
+                </div>
+              </div>
+            <% end %>
+                
+            <% if @interview.read_ahead_file.attached? %>
+              <div class="pt-3 mt-3">
+                <h6><i class="fa fa-paperclip mr-2 mb-4"></i>Read ahead file</h6>
+                <%= link_to(@interview.read_ahead_file.filename, rails_blob_path(@interview.read_ahead_file, disposition: "attachment")) %>
+              </div>
+            <% end %>
+            <div class="col text-right text-xs-right">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <i class="fa fa-user text-muted mr-1" title='Confirmed guests'></i>Confirmed guests: <%= @interview.invites.confirmed.count %>
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="fa fa-eye text-muted mr-1" title='Applicants'></i>Applicants: <%= @interview.members.count %>
+                    </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

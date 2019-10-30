@@ -1,0 +1,38 @@
+<table class="table table-hover table-cards align-items-center">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Upcoming interviews</th>
+            <th scope="col">Completed interviews</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @users.each do |user| %>
+            <tr class="bg-white" data-link="<%= current_account_user_path(user) %>">
+                <th scope="row">
+                    <div class="media align-items-center">
+                        <span class="avatar avatar-lg bg-blue mr-3"><%= user.initials %></span>
+                        <div class="media-body">
+                            <h6 class="h5 font-weight-normal mb-0"><%= user.full_name %></h6>
+                            <span class="font-weight-normal text-muted"><%= user.email %></span>
+                        </div>
+                    </div>
+                </th>
+                <td>
+                    <div class="media-body">
+                        <h6 class="h5 font-weight-normal mb-0"><span class="font-weight-normal text-muted">Count:</span> <%= user.interviews.upcoming.count %></h6>
+                        <span class="font-weight-normal text-muted">Next: <%= user.interviews.upcoming.first&.starts_at %></span>
+                    </div>
+                </td>
+                <td>
+                    <div class="media-body">
+                        <h6 class="h5 font-weight-normal mb-0"><span class="font-weight-normal text-muted">Count:</span> <%= user.interviews.ended.count %></h6>
+                        <span class="font-weight-normal text-muted">Last: <%= user.interviews.ended.order(:completed_at).last&.starts_at %></span>
+                    </div>
+                </td>
+            </tr>
+            <tr class="table-divider"></tr>
+        <% end %>
+
+    </tbody>
+</table>

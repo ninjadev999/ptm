@@ -1,0 +1,6 @@
+<%= link_to 'Guest Profile', my_profile_path, class: 'dropdown-item' %>
+
+<% if current_user.host? %>
+  <div class="dropdown-divider"></div>
+  <%= link_to 'Host Profile', switch_roles_path, method: :post, class: 'dropdown-item' %>
+<% end %>

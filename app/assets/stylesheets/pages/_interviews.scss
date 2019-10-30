@@ -1,0 +1,33 @@
+.participants_avatar_group {
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.participant_avatar {
+  z-index: 1;
+  transition: margin .15s ease-in-out;
+  //font-size: .75rem;
+  //width: 1.875rem;
+  //height: 1.875rem;
+  border-radius: 50%;
+  object-fit: cover;
+
+  font-size: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: .5rem;
+}
+
+.participants_avatar_group .avatar img {
+  border: 2px solid #fff;
+}
+
+.participants_avatar_group .avatar {
+  z-index: 1;
+  transition: margin .15s ease-in-out;
+}
+.avatar+.avatar {
+  margin-left: .25rem;
+  margin-right: .25rem!important;
+}

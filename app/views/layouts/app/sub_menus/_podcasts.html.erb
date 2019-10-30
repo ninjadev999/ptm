@@ -1,0 +1,6 @@
+<%- accounts = all_accounts %>
+<% if accounts %>
+	<% accounts.each do |account| %>
+		<%= link_to raw("#{truncate(account.name, length: 25)}"), select_account_path(account), class: 'dropdown-item' %>
+	<% end %>
+<% end %>

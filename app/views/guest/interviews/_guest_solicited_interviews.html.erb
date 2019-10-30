@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header border-0">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h6 class="mb-0">Solicited Interviews</h6>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm table-flush align-items-center align-items-center">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Days until interview</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @solicited_interviews.each do |interview|  %>
+        <% invite = interview.invites.where(guest_id: current_user.id).first %>
+        <tr>
+          <td>
+            <span class="font-weight-bold text-sm">
+              <%= link_to interview.name, interview_path(interview) %>
+            </span>
+          </td>
+          <td>
+            <% if interview.starts_at.present? %>
+              <% diff_days = (interview.starts_at.to_i - Time.now.to_i) / 86400 %>
+              <%= diff_days > 0 ? "#{diff_days} days" : "past #{diff_days.abs} days ago" %>
+            <% else %>
+              None
+            <% end %>
+          </td>
+          <td>
+            <%= interview.starts_at.present? ? local_time(interview.starts_at) : 'Unscheduled' %>
+          </td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>

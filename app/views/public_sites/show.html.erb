@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @public_site.name %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @public_site.url %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @public_site.image_url %>
+</p>
+
+<%= link_to 'Edit', edit_public_site_path(@public_site) %> |
+<%= link_to 'Back', public_sites_path %>

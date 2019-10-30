@@ -1,0 +1,12 @@
+<h5>Hi <%= @invite.name %></h5>
+<p>
+  You've been invited to manage PTM podcast: <%= @invite.account.name %>!
+</p>
+
+<p>
+  Please <%= link_to "visit this page to confirm or decline the invitation", edit_podcast_invite_url(@invite.code) %>.
+</p>
+
+<br><br>
+Thanks,<br>
+Pass the Mic

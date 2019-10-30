@@ -1,0 +1,28 @@
+<h5 class="interview-title">
+  <i class="fa fa-user mr-3 mb-4 mt-3"></i>Podcasters<span class="badge badge-light ml-2">(<%= @interview.invites.active.count %>)</span>
+</h5>
+
+<% if @interview.invites.empty? %>
+    <p>No podcasters have been invited yet.</p>
+<% else %>
+
+  <% @interview.invites.order(:id).each do |invite| %>
+
+    <div class="interview-show-content mb-3">
+
+      <h6>
+        <%= invite.name %>
+      </h6>
+
+      <div class="interview-invitee-email mb-3"><%= invite.email %></div>
+
+      <div>
+        <%= render partial: 'interviews/invite_status', locals: { invite: invite } %>
+        <%= link_to raw('<i class="fa fa-trash-o"></i>'), invite_path(invite), method: :delete, data: { confirm: 'Are you sure to remove this invitation? This cannot be reverted.' }, class: 'float-right bigger-20' %>
+        <%= link_to raw('<i class="fa fa-bell-o"></i>'), resend_invite_path(invite), method: :post, data: { confirm: 'Are you sure to resend the invitation?' }, class: 'float-right bigger-20 mr-2' %>
+      </div>
+    </div>
+
+  <% end %>
+
+<% end %>

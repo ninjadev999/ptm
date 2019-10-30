@@ -1,0 +1,45 @@
+<header id="header-main">
+  <nav class="navbar navbar-main navbar-expand-lg navbar-sticky navbar-dark" id="navbar-main">
+    <div class="container">
+      <a class="navbar-brand" href="<%= interviews_path %>">
+        <%= image_tag 'white_logo_transparent.png' %>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbar-main-collapse">
+        <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+          <li class="nav-item">
+            <%= link_to 'Find Podcasters', search_interviews_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'My Guest Appearances', interviews_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                My Profiles
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= render 'layouts/guest/sub_menus/profiles' %>
+              </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Account
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if current_user.host_subscription.nil? %>
+                <a class="dropdown-item" href="/preferences">Preferences</a>
+                <div class="dropdown-divider"></div>
+              <% end %>
+              <a class="dropdown-item" href="/users/sign_out">Sign out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+

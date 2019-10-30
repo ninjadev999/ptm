@@ -1,0 +1,26 @@
+<div class="row mb-5 justify-content-md-center">
+  <div class="col-md-10">
+    <button type="button" class="btn btn-sm btn-outline-primary btn-icon mb-3" data-toggle="collapse" data-target="#filters">
+        <span class="btn-inner--text">Filters</span>
+        <span class="btn-inner--icon"><i class="fa fa-sliders"></i></span>
+    </button>
+    <div class="collapse multi-collapse" id="filters">
+      <%= simple_form_for :filter, url: search_interviews_path, method: :get, remote: true do |f| %>
+        <%= f.label :topic_list, 'Topics', class: 'form-control-label' %>
+        <%= f.autocomplete_field :topic_list, autocomplete_topic_name_profiles_path, 
+          :value => @account.most_topics.join(', '), :multiple => true, data: { max_tags: 10, only_available_tags: true } %>
+
+        <%= f.label :expertise_list, 'Expertises', class: 'form-control-label' %>
+        <%= f.autocomplete_field :expertise_list, autocomplete_expertise_name_profiles_path, 
+          :value => @account.most_expertises.join(', '), :multiple => true, data: { max_tags: 10, only_available_tags: true } %>
+
+        <%= f.label :promotion_list, 'Promotions', class: 'form-control-label' %>
+        <%= f.autocomplete_field :promotion_list, autocomplete_promotion_name_profiles_path, 
+          :value => @account.most_promotions.join(', '), :multiple => true, data: { max_tags: 10, only_available_tags: true } %>
+        <div class='text-right'>
+          <%= f.submit 'Search', class: 'btn btn-primary btn-circle mb-3' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

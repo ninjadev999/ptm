@@ -1,0 +1,14 @@
+<section class="slice">
+  <div class="container">
+    <div class="row row-grid">
+
+      <% if current_user.host_subscription.present? && !current_user.guest? %>
+        <%= render partial: 'layouts/theme/settings_sidebar' %>
+      <% end %>
+
+      <div class="col-lg-12">
+        <%= render partial: 'preferences/settings', locals: { user: current_user } %>
+      </div>
+    </div>
+  </div>
+</section>

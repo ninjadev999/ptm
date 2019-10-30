@@ -1,0 +1,33 @@
+<div>
+  <a href="javascript: beginAudiovisualCheck();" class="btn btn-info">Begin Audiovisual Test &raquo; <small>Click "Allow" if/when prompted</small></a>
+</div>
+
+<canvas id="meter" width="500" height="50" class="mt-2 mb-2"></canvas>
+<p>Please adjust your settings until you see a green volume indicator when you are speaking. The ideal sound recording is loud enough for listeners to hear, but not so loud that it causes <i>clipping (red level indicator)</i>.</p>
+
+<p>Your webcam video will load below (if setup correctly) upon clicking the <i>Begin Audiovisual Test</i> button above.</p>
+
+<video autoplay class="webcam-test"></video>
+
+<p style="display: none" id="detected-resolution">Looking good! Detected the following video dimensions - Width: <span id="video-width"></span>  &nbsp;Height: <span id="video-height"></span>
+<br>
+The common name for this resolution is: <span id="resolution-name"></span>
+</p>
+
+<p>When you feel confident that your microphone and webcam are ready, please continue below.</p>
+
+<script type="text/javascript">
+
+  var audioContext = null;
+  var meter = null;
+  var canvasContext = null;
+  var WIDTH=500;
+  var HEIGHT=50;
+  var rafID = null;
+
+  const constraints = { video: {
+    width: 4096,
+    height: 2160
+  }};
+
+</script>

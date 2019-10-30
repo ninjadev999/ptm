@@ -1,0 +1,10 @@
+<%= link_to guest_path(guest) do %>
+	<% if guest.profile&.photo&.attached? && guest.profile&.photo&.variable? %>
+	  <% size = local_assigns[:custom_size] || "120x120" %>
+	  <%= image_tag guest.profile.photo.variant(combine_options: { resize: "#{size}>", extent: "#{size}", background: "white", gravity: "center"}), class: "rounded-border #{'avatar avatar-lg' if local_assigns[:custom_size].nil?} #{local_assigns[:custom_class] unless local_assigns[:custom_class].nil?}", title: guest.full_name %>
+	<% else %>
+	  <span class="avatar avatar-lg bg-blue <%= local_assigns[:custom_class] %>">
+	  	<%= guest.decorate.initials %>
+	  </span>
+	<% end %>
+<% end %>

@@ -1,0 +1,51 @@
+<section class="slice container">
+    <div class="row row-grid">
+      <div class="col-lg-12">
+        <div class="row row-grid">
+          <div class="col-md-4">
+            <%- if @account.logo.attachment %>
+             <%= image_tag @account.logo.variant(resize: "72x72"), class: 'avatar avatar-lg mr-3' %>
+            <%- end %>
+          </div>
+          <% if policy(@account).manage_invites? %>
+            <div class="text-right col-md-8">
+              <a href="<%= selector_interviews_path %>" class="btn btn-primary btn-icon">
+                <span class="btn-inner--text">New interview</span>
+                <span class="btn-inner--icon"><i class="fa fa-podcast"></i></span>
+              </a>
+              <span class='ml-4 mr-4'>or</span>
+              <a href="<%= selector_interviews_path(posting: true) %>" class="btn btn-primary btn-icon">
+                <span class="btn-inner--text">Invite PTM Guest</span>
+                <span class="btn-inner--icon"><i class="fa fa-user"></i></span>
+              </a>
+              <div>
+                <% if current_user.free_interview_eligible? && !current_user.host_subscription %>
+                  <span class="badge badge-dot mr-4">
+                    <i class="bg-warning"></i> <%= pluralize(NUM_FREE_INTERVIEWS - current_user.free_interviews_count, 'free interview') %>
+                  </span>
+                <% end %>
+                <span class="badge badge-dot mr-4">
+                  <i class="bg-green"></i>
+                  <% if current_user.host_subscription %>
+                    unlimited interviews
+                  <% else %>
+                    <%= pluralize(current_user.single_itv_remaining, 'interview') %> remaining
+                  <% end %>
+                </span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="row card">
+          <%= render partial: 'interviews/index/upcoming_list' %>
+        </div>
+      </div>
+    </div>
+    <div class="row row-grid">
+      <div class="col-lg-12">
+        <div class="row card">
+          <%= render partial: 'interviews/index/completed_list' %>
+        </div>
+      </div>
+    </div>
+</section>

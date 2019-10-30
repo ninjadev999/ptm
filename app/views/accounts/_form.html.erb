@@ -1,0 +1,32 @@
+<%= simple_form_for @account do |f| %>
+  <%= f.input :name, label: "Podcast Name", required: true %>
+  <%= f.input :time_zone, label: "Time Zone of the Podcast", collection: time_zone_collection, prompt: "(Select time zone)", required: true %>
+  <%= f.input :description, label: "Podcast Description", as: :text %>
+
+  <%- if @account.logo.attachment %>
+
+    <div class="mt-2 mb-2">Current Logo</div>
+    <div class="mb-2"><%= image_tag @account.logo.variant(resize: "100x100") %></div>
+
+    <% if !@account.new_record? %>
+      <%= f.input :remove_logo, label: "Delete the current logo.", as: :boolean,
+                  checked_value: true, unchecked_value: false %>
+    <% end %>
+
+  <%- end %>
+
+  <%= f.input :logo, label: "Podcast Logo", as: "file" %>
+  <a name="#audiovisual_options"></a> <!-- anchor links not working in Chrome yet -->
+  <%= f.input :audio_visual_download_options, label: "Audiovisual Download Options", collection: Account.audio_visual_download_options_array, prompt: false, selected: @account.audio_visual_download_options %>
+  <%= f.input :audio_download_formats, label: "Audio Download Format Options", collection: Account.audio_download_format_options, prompt: false, selected: @account.audio_download_formats %>
+  <%= f.input :max_resolution, label: "Video Resolution", collection: Account.video_resolution_options, prompt: false, selected: @account.max_resolution %>
+  <%= f.input :downloads_per_episode, label: "Estimated Downloads per episode" %>
+  <%= f.input :social_media_followers, label: "Total number of social media followers" %>
+
+
+  <%= f.button :submit, class: "btn btn-primary btn-rounded" %>
+  <% if !@account.new_record? %>
+    <a class="btn btn-danger" data-confirm="Are you sure? This can't be undone." data-method="delete" href="/accounts/<%= @account.to_param %>">Delete Account</a>
+  <% end %>
+
+<% end %>

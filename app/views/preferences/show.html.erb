@@ -1,0 +1,61 @@
+<section class="slice">
+  <div class="container">
+    <div class="row row-grid">
+
+      <%= render partial: 'layouts/theme/settings_sidebar' %>
+
+      <div class="col-lg-9">
+          <div class="page-inner-header mb-4">
+            <h5 class="mb-1">Change password</h5>
+            <p class="text-muted mb-0">You can help us, by filling your data, create you a much better experience using our website.</p>
+          </div>
+        <%= simple_form_for @user, method: :put, url: "/preferences/update_password", defaults: { input_html: { class: "form-control form-control-sm" } } do |f| %>
+          <div class="row">
+            <div class="col-md-6">
+             <%= f.input :current_password, as: :password %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :password, as: :password %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :password_confirmation, as: :password, label: "Confirm password" %>
+            </div>
+          </div>
+          <div class="mt-4">
+            <%= f.submit "Update password", class: "btn btn-sm btn-primary" %>
+          </div>
+        <% end %>
+        <div class="mt-5 pt-5 delimiter-top">
+          <div class="page-inner-header mb-4">
+            <h5 class="mb-1">Details</h5>
+          </div>
+          <%= simple_form_for @user, method: :put, url: "/preferences/update_password", html: { id: 'preferences-details' }, defaults: { input_html: { class: "form-control form-control-sm" } } do |f| %>
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :current_password, as: :password, input_html: { id: 'current-password-2' } %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <%= f.input :email %>
+              </div>
+              <div class="col-md-3">
+                <%= f.input :first_name %>
+              </div>
+              <div class="col-md-3">
+                <%= f.input :last_name %>
+              </div>
+              
+            </div>
+            <div class="mt-4">
+              <%= f.submit "Update profile", class: "btn btn-sm btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+<div class="container row post-interview-guest-panel mb-3 pt-3 pb-3">
+  <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 text-center">
+    <%= render partial: 'shared/guest_avatar', locals: { guest: user, custom_size: '120x120' } %>
+  </div>
+  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 guest-profile-post-interview">
+    <div class='host-name mb-2'><%= user.full_name %></div>
+    <div class='host-bio mb-1'><%= simple_format(truncate(user.profile&.bio, length: 100)) %></div>
+    <% if !user.profile&.primary_industry.blank? %>
+      <p><strong>Primary Industry: </strong>
+        <b><%= user.profile&.primary_industry %></b>
+      </p>
+    <% end %>
+    <% if !user.expertises.empty? %>
+      <p>
+        <strong>Expertises: </strong>
+        <% user.expertises.each_with_index do |expertise, i| %>
+          <% color = [:info, :danger, :warning, :success][i % 4] %>
+          <span class="badge badge-tiny badge-pill badge-<%=color%> text-uppercase"><%= expertise %></span>
+        <% end %>
+      </p>
+    <% end %>
+    <% if !user.promotions.empty? %>
+      <p><strong>Promotions: </strong>
+        <% user.promotions.each_with_index do |promotion, i| %>
+            <% color = [:info, :danger, :warning, :success][i % 4] %>
+            <span class="badge badge-tiny badge-pill badge-<%=color%> text-uppercase"><%= promotion %></span>
+        <% end %>
+      </p>
+    <% end %>
+    <% if !user.topics.empty? %>
+      <p><strong>Topics: </strong>
+        <% user.topics.each_with_index do |topic, i| %>
+          <% color = [:info, :danger, :warning, :success][i % 4] %>
+          <span class="badge badge-tiny badge-pill badge-<%=color%> text-uppercase"><%= topic %></span>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+    <div class="post-interview-rating-container">
+      <div class="rate-this mb-2">Rate this guest</div>
+
+      <div class="">
+        Entertainment
+      </div>
+      <div class="mb-2">
+        <%= rating_for user.profile, 'entertainment', disable_after_rate: false, cancel: false %>
+      </div>
+
+      <div class="">
+        Knowledge
+      </div>
+      <div class="mb-2">
+        <%= rating_for user.profile, 'knowledge', disable_after_rate: false, cancel: false %>
+      </div>
+
+      <div class="">
+        Content
+      </div>
+      <div class="mb-2">
+        <%= rating_for user.profile, 'content', disable_after_rate: false, cancel: false %>
+      </div>
+
+    </div>
+  </div>
+
+</div>

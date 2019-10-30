@@ -1,0 +1,169 @@
+<%= simple_form_for @order do |f| %>
+  <section class="slice">
+    <div class="container">
+      <div class="row row-grid">
+        <div class="col-lg-8">
+          <div class="">
+            <div class="page-inner-header mb-4">
+              <h5 class="mb-1">Add new address</h5>
+              <p class="text-muted mb-0">To who and where are we shipping this fine microphone to?</p>
+
+            </div>
+            <div class="row">
+              <%= f.simple_fields_for :address_attributes, @order.address do |ff| %>
+                <div class="col-md-5">
+                  <%= ff.input :name, label: "Delivery name", required: true %>
+                </div>
+                <div class="col-md-4">
+                  <%= f.input :email, label: "Interviewee email address", required: true %>
+                </div>
+                <div class="col-md-3">
+                  <%= f.input :interview_at, label: "Interview date", as: :string, required: true %>
+                </div>
+                </div>
+                <div class="row align-items-center">
+                  <div class="col-md-9">
+                    <%= ff.input :street1, label: "Address line 1", required: true %>
+                  </div>
+                  <div class="col-md-3">
+                    <%= ff.input :street2, label: "Address line 2" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <%= ff.input :city, required: true %>
+                  </div>
+                  <div class="col-md-4">
+                    <%= ff.input :state, required: true %>
+                  </div>
+                  <div class="col-md-4">
+                    <%= ff.input :zip, label: "Postal code", required: true %>
+                  </div>
+                </div>
+                </div>
+              <% end %>
+              <div class="mt-5 pt-5 delimiter-top d-none">
+                <div class="page-inner-header mb-4">
+                  <h5 class="mb-1">Shipping method</h5>
+                  <p class="text-muted mb-0">Fill in your address info for upcoming orders or payments.</p>
+                </div>
+
+                <div class="row row-grid mt-4">
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-8">
+                            <div class="custom-control custom-radio">
+                              <input type="radio" name="shipping-method" class="custom-control-input" id="shipping-standard">
+                              <label class="custom-control-label text-dark font-weight-bold" for="shipping-standard">Standard Delivery</label>
+                            </div>
+                          </div>
+                          <div class="col-4 text-right">
+                            <span class="h6">Free</span>
+                          </div>
+                        </div>
+                        <p class="text-muted text-sm mt-3 mb-0">Estimated 10-20 days shipping. Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-8">
+                            <div class="custom-control custom-radio">
+                              <input type="radio" name="shipping-method" class="custom-control-input" id="shipping-fast">
+                              <label class="custom-control-label text-dark font-weight-bold" for="shipping-fast">Fast Delivery</label>
+                            </div>
+                          </div>
+                          <div class="col-4 text-right">
+                            <span class="h6">$25 USD</span>
+                          </div>
+                        </div>
+                        <p class="text-muted text-sm mt-3 mb-0">Estimated 3-5 days shipping. Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-5 text-right">
+                <% if @order.cancelable? %>
+                <a href="/orders/<%= @order.to_param %>" data-confirm="Are you sure? This can't be undone." data-method="delete" class="btn btn-danger btn-sm">Cancel</a>
+
+                <% end %>
+                <button type="submit" class="btn btn-sm btn-primary">Preview order</button>
+              </div>
+              </div>
+        <div class="col-lg-4">
+
+          <div data-toggle="sticky" data-sticky-offset="100">
+
+            <div class="card" id="card-summary">
+              <div class="card-header py-3">
+                <div class="row align-items-center">
+                  <div class="col-6">
+                    <span class="h6">Summary</span>
+                  </div>
+                  <div class="col-6 text-right">
+                    <span class="badge badge-md badge-pill badge-info">1 Microphone</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="media align-items-center">
+                      <img alt="Image placeholder" class="mr-2" src="https://placehold.it/42x42" style="width: 42px;">
+                      <div class="media-body">
+                        <div class="text-limit lh-100">
+                          <small class="text-dark font-weight-bold mb-0">Some microphone</small>
+                        </div>
+                        <small class="text-muted">Connects to anything</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 text-right lh-100">
+                    <small class="text-dark">$0.00</small>
+                  </div>
+                </div>
+                <div class="row mt-3 pt-3 border-top">
+                  <div class="col-8 text-right">
+                    <small class="text-dark font-weight-bold">Subtotal:</small>
+                  </div>
+                  <div class="col-4 text-right">
+                    <span class="text-sm font-weight-bold">$0.00</span>
+                  </div>
+                </div>
+                <div class="row mt-3 pt-3 border-top">
+                  <div class="col-8 text-right">
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <div class="text-limit lh-100">
+                          <small class="text-dark font-weight-bold mb-0">Shipping</small>
+                        </div>
+                        <small class="text-muted" id="shipping-type">Standard Delivery</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 text-right">
+                    <span class="text-sm font-weight-bold" id="shipping-cost">$0.00</span>
+                  </div>
+                </div>
+                <div class="row mt-3 pt-3 border-top">
+                  <div class="col-8 text-right">
+                    <small class="text-uppercase text-dark font-weight-bold">Total:</small>
+                  </div>
+                  <div class="col-4 text-right">
+                    <span class="text-sm text-dark font-weight-bold" id="total">$0.00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<% end %>

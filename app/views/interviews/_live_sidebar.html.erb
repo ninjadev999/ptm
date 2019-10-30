@@ -1,0 +1,60 @@
+<div class="row">
+  <div class='col side-card'>
+    <div class="card">
+      <div class="card-body room-controls">
+        <button class="btn btn-info mb-4" id="call">Join Interview</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" id="my-video-container">
+  <div class='col side-card'>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="heading heading-5 strong-600">My Video</h5>
+        <div id="my-video" class="my-video active"></div>
+        <div class="mt-3 my-video-note">Your video (when live).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class='col side-card'>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="heading heading-5 strong-600">Current Participants</h5>
+        <div id="participants"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col side-card">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="heading heading-5 strong-600">Collaboration Zone</h5>
+        <p>
+          <%= @interview.read_ahead %>
+        </p>
+        <div id="data-stream">
+        </div>
+        <input id="data" />
+        <button id="submit-data" class="btn btn-info disabled btn-icon-only rounded-circle ml-2">
+          <span class="btn-inner--icon"><i class="fa fa-arrow-right"></i></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" id="clock-container">
+  <div class='col side-card'>
+    <div class="card">
+      <div class="card-body">
+        Time in Room: <span id="clock">00:00</span>
+      </div>
+    </div>
+  </div>
+</div>

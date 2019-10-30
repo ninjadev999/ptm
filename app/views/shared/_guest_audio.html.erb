@@ -1,0 +1,3 @@
+<% if guest.profile&.audio_recording&.attached? %>
+  <%= audio_tag url_for(guest.profile&.audio_recording), controls: true, preload: "none" %>
+<% end %>

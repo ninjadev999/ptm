@@ -1,0 +1,166 @@
+<html>
+  <head>
+    <%= favicon_link_tag image_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
+  </head>
+  <body>
+    <div class='bg'>
+      <div class='logo-row'>
+        <div class='logo-col'>
+          <div class='logo'></div>
+        </div>
+      </div>
+      <div class='lower-row'>
+        <div class='description-col row'>
+          <div class='description'>
+            <p>Welcome to the new standard for remote recording! Please join as as we bring you studio quality sound and guest networking all on one platform! Sign up to get notified when we launch!</p>
+            <p>We are gearing up to launch what we believe to be the new standard in guest networking and remote recording! We want to put an end to poor sounding remote interviews and overly complicated setup.  Our service is based on a quality product and top notch customer support with a pricing structure that makes sense.</p>
+          </div>
+        </div>
+        <div class='sign-up-col'>
+          <div class='sign-up'>
+            <h2>Subscribe Today</h2>
+            <div class='form'>
+    <!-- Begin Mailchimp Signup Form -->
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+      #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+      /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+         We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+    </style>
+    <div id="mc_embed_signup">
+    <form action="https://passthemicrophone.us19.list-manage.com/subscribe/post?u=87af818b3eb30475448e190ab&amp;id=c405289678" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+        <div class='subscribe-description'>
+            <ul>
+              <li>Studio quality sound at 48kHz bit rate!</li>
+              <li>Easy setup with customer support for your guest!</li>
+              <li>Optional individual track recording!</li>
+              <li>WAV or MP3 files!</li>
+              <li>Free file storage for a YEAR</li>
+              <li>No more browser restrictions!</li>
+              <li>Record up to THREE guests!</li>
+              <li>Option to record video up to 1080p!</li>
+              <li>Easy scheduling!</li>
+              <li>Guest matching!</li>
+              <li>Optional monthly subscription!</li>
+              <li>More exciting features coming soon!</li>
+            </ul>
+        </div>
+        <div id="mc_embed_signup_scroll">
+    <div class="mc-field-group">
+      <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+    </label>
+      <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+    </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_87af818b3eb30475448e190ab_c405289678" tabindex="-1" value=""></div>
+        <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+        </div>
+    </form>
+    </div>
+    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+    <!--End mc_embed_signup-->
+              <!-- <input type='email' placeholder="Email"></input>
+              <div class='blue-button'>Sign Me Up</div> -->
+            </div>
+    <%= link_to 'Not a Podcaster? Join Guest Network!', choose_plan_account_setups_path, style: 'float: right; margin-bottom: 10px;' %>
+    <%= link_to 'Already have account? Sign in', new_user_session_path, style: 'float: right; margin-bottom: 10px;' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+
+
+    .form{
+    }
+    .form input{
+      width: 200px;
+      height: 30px;
+    }
+    .subscribe-description {
+      padding-bottom: 25px;
+    }
+    .blue-button{
+      display: block;
+      margin: 0 auto;
+      margin-top: 10px;
+      width: 200px;
+      background: blue;
+      color: white;
+      cursor: pointer;
+      height: 35px;
+      line-height: 35px;
+    }
+
+    .lower-row{
+      padding-top: 25px;
+      vertical-align:top;
+    }
+    .description-col, .sign-up-col{
+      display: inline-block;
+      width: 49%;
+      vertical-align:top;
+    }
+
+    .logo-row{
+      padding-top: 5%;
+    }
+    .logo-col{
+      width: 49%;
+    }
+
+    .logo{
+      background-image: url(<%= asset_url("white_logo_transparent.png") %>);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin: 0 auto;
+      height: 150px;
+      width: 400px;
+    }
+    .description{
+      width: 400px;
+      height: 400px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+      margin: 0 auto;
+    }
+    .sign-up{
+      background: white;
+      width: 300px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 15px;
+      padding-top: 35px;
+      padding-bottom: 60px;
+    }
+
+    .bg {
+        /* The image used */
+        background-image: url(<%= asset_url("root_background.jpg") %>);
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    </style>
+  </body>
+</html>

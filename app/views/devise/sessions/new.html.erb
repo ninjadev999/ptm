@@ -1,0 +1,38 @@
+<div class="text-center mb-5">
+  <h6 class="h3">Log in</h6>
+  <p class="text-muted mb-0">Welcome back!</p>
+</div>
+<span class="clearfix"></span>
+<!--
+<%= link_to '#', class: "btn btn-facebook btn-icon-label" do %>
+    <span class="btn-inner--icon"><i class="fa fa-facebook"></i></span>
+    <span class="btn-inner--text">Login in with Facebook</span>
+<% end %>
+-->
+<div class='text-center'>
+  <%= link_to '/auth/linkedin', class: "btn btn-twitter btn-icon-label" do %>
+      <span class="btn-inner--icon"><i class="fa fa-linkedin"></i></span>
+      <span class="btn-inner--text">Login in with Linkedin</span>
+  <% end %>
+</div>
+<hr class="hr-text" data-content="or">
+
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :email, label: "Your email address", input_html: { class: "form-control", placeholder: "mark@coolpodcast.com" } %>
+  <%= f.input :password, label: "Your great password", input_html: { class: "form-control", placeholder: "********" } %>
+  <div class="row align-items-center">
+    <div class="col-sm-5">
+      <button type="submit" class="btn btn-primary mb-3 mb-sm-0" data-disable-with="Authenticating...">Sign in</button>
+    </div>
+    <div class="col-sm-7 text-sm-right">
+      <span class="small d-sm-block d-md-inline">Not registered?</span>
+      <%= link_to "Create an account", choose_type_path, class: "small d-sm-block d-md-inline" %><br />
+      <%= link_to "Reset your password", new_user_password_path, class: "small font-weight-bold" %><br />
+      <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name), class: "small font-weight-bold" %><br />
+      <% end -%>
+    </div>
+  </div>
+<% end %>
+

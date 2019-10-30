@@ -1,0 +1,4 @@
+<%= simple_form_for @order, url: "/order_wizards/#{@order.id}", method: :put do |f| %>
+	<%= f.hidden_field :interview_at, value: f.object.starts_at&.iso8601, class: 'datetimepicker' %>
+  <%= f.submit "Next step" %>
+<% end %>

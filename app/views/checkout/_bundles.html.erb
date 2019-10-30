@@ -1,0 +1,37 @@
+<% if @bundle.pack? %>
+  <div class="row mt-3">
+
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <h5>Interview Purchase Options</h5>
+
+          <p>Bulk interview purchase options are available below.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <% @bundles.each do |bundle| %>
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <label for="bundle_<%= bundle.id %>" class="bundle-selection-radio">
+              <div class="bundle-selection <%= 'bundle-selected' if @bundle == bundle %>" data-bundle-id="<%= bundle.id %>">
+                <input type="radio" name="bundle_id" value="<%= bundle.id %>" class="radio-bundle pb-1" id="bundle_<%= bundle.id %>" <%= 'checked' if @bundle == bundle %>  />
+                <div class="bundle-heading mb-2"><%= pluralize(bundle.number_of_interviews, "interview") %></div>
+                <%= bundle.name %>
+                <br>
+                <div class="bundle-price-per-interview mt-2 mb-2"><%= number_to_currency(bundle.price_per_interview_in_dollars) %> per interview</div>
+
+                <div class="bundle-price mt-2"><%= number_to_currency(bundle.price_in_dollars) %> total</div>
+              </div>
+            </label>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+<% else %>
+  <input type="radio" name="bundle_id" value="<%= @bundle.id %>" hidden='hidden'>
+<% end %>

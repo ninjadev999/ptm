@@ -1,0 +1,17 @@
+<% if invite.guest.present? %>
+    <% if current_user.host %>
+	      <%= render partial: 'guest/profiles/profile_post_interview', locals: { user: invite.guest } %>
+    <% elsif current_user.guest %>
+        <%= render partial: 'accounts/account_post_interview', locals: { account: invite.interview.account } %>
+    <% end %>
+<% else %>
+	<div class="card profile-sm">
+		<div class="profile-img">
+			<span class="avatar avatar-lg bg-blue mr-3"><%= invite.decorate.initials %></span>
+		</div>
+    <div class="card-body">
+    	<h6 class="card-title"><%= invite.name %></h6>
+      <%= render partial: 'interviews/invite_status', locals: { invite: invite } %>
+    </div>
+	</div>
+<% end %>

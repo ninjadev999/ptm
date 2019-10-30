@@ -1,0 +1,21 @@
+<section class="slice">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 mt-lg-5">
+        <div class='float-right'>
+          <%= link_to search_interviews_path, class: "btn btn-secondary btn-icon" do %>
+              <span class="btn-inner--icon"><i class="fa fa-arrow-left"></i></span>
+              <span class="btn-inner--text">Back To Interview Search</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-6 mt-lg-5">
+        <div class="d-flex justify-content-center">
+          <%= render partial: 'accounts/show_form' %>
+        </div>
+      </div>
+      <div class="col-md-3 mt-lg-5 mb-5">
+      </div>
+    </div>
+  </div>
+</section>

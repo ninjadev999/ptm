@@ -1,0 +1,174 @@
+<section class="pt-5 pt-lg-0 mt-5 mb-5">
+
+  <div class="container" id="step1">
+
+    <div class="row mb-3">
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border" style="border-bottom: none;">
+        <h3 class="gateway-step step-completed"><i class="fa fa-hand-o-right active-blue mr-2"></i>Step 1</h3>
+        <div class="step-desc step-completed">Test Webcam and Mic Connectivity</div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border">
+        <h3 class="gateway-step  step-inactive"><i class="fa mr-2"></i> Step 2</h3>
+        <div class="step-desc step-inactive">Confirm Audiovisual Settings</div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border">
+        <h3 class="gateway-step step-inactive"><i class="fa mr-2"></i> Step 3</h3>
+        <div class="step-desc step-inactive">Real-time Prep with Guest(s)</div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border">
+        <h3 class="gateway-step step-inactive">Step 4</h3>
+        <div class="step-desc step-inactive">Go Live!</div>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-1 col-md-1">
+      </div>
+
+      <div class="col-lg-8 col-md-8 col-sm-12">
+
+        <div class="card mt-2">
+
+          <div class="card-body">
+            <h2 class="interview-name mb-2">Test Webcam and Mic Connectivity</h2>
+            <p>
+              <b><%= @interview.name %></b> at <%= safe_local_time(@interview.starts_at) %>
+            </p>
+
+            <%= render 'audiovisual_common' %>
+            <hr>
+
+            <a href="javascript: window.location.reload();" class="reload-guests mr-2 mt-0" title="Refresh Guest Online Status"><i class="fa fa-refresh"></i></a>
+
+            <p>Your interivew has <%= pluralize(@interview.invites.confirmed.count, 'confirmed guest') %>:</p>
+            <div class="gateway-invites">
+              <% @interview.invites.confirmed.each do |invite| %>
+                <p class="<%= css_class_for_invite(invite) %>">
+                  <%= invite.name %>
+                  &nbsp;&nbsp;&nbsp;
+                  <% if invite.ready? %>
+                    (Ready - as of <%= time_ago_in_words(invite.ready_at) %> ago)
+                  <% else %>
+                    (Not yet in waiting area)
+                  <% end %>
+                </p>
+              <% end %>
+            </div>
+            <div class="overall-status mb-3 <%= css_for_all_guests_ready(@interview.all_confirmed_guests_waiting?) %>">
+
+              <% if @interview.all_confirmed_guests_waiting? %>
+                <i class="fa fa-check-circle-o"></i> All confirmed guests are ready.
+              <% else %>
+                <% if @interview.no_confirmed_guests? %>
+                  <i class="fa fa-clock-o"></i> This interview has no confirmed guests. You can still continue if you are ready.
+                <% else %>
+                  <i class="fa fa-clock-o"></i> Still waiting on some guests. You can begin testing your own audiovisual settings if you are ready.
+                <% end %>
+                </div>
+              <% end %>
+            </div>
+
+            <a data-fancybox data-src="#step2-fancybox" class="btn btn-primary" href="javascript:;">
+              Next &raquo; Confirm Audiovisual Settings
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-3">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container" id="step3" style="display: none;">
+
+    <div class="row mb-3">
+
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border">
+        <h3 class="gateway-step step-completed"><i class="fa fa-check-circle completed-green mr-2"></i>Step 1</h3>
+        <div class="step-desc step-completed">Test Webcam and Mic Connectivity</div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border">
+        <h3 class="gateway-step step-completed"><i class="fa fa-check-circle completed-green mr-2"></i> Step 2</h3>
+        <div class="step-desc step-completed">Confirm Audiovisual Settings</div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border" style="border-bottom: none;">
+        <h3 class="gateway-step"><i class="fa fa-hand-o-right active-blue mr-2"></i> Step 3</h3>
+        <div class="step-desc">Real-time Prep with Guest(s)</div>
+      </div>
+
+      <div class="col-lg-3 col-md-3 col-sm-3 step-border">
+        <h3 class="gateway-step step-inactive">Step 4</h3>
+        <div class="step-desc step-inactive">Go Live!</div>
+      </div>
+
+    </div>
+
+    <div class="row mt-3">
+
+      <div class="col-lg-4 col-md-4 col-sm-4">
+
+        <a data-fancybox data-src="#step2-fancybox" class="btn btn-primary" href="javascript:;">
+          Change Audiovisual Settings
+        </a>
+
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4">
+
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4">
+
+        <a href="<%= launch_interview_path(@interview) %>" class="btn btn-success" data-method="put" data-confirm="You are about to go live. Are you ready?">
+          I'm ready. Go LIVE!
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+
+      <div class="col-lg-12 col-md-12 col-sm-12" id="main-content-area">
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- Hidden content -->
+<div style="display: none;" id="step2-fancybox">
+
+  <h5 class="interview-title">Please confirm your audiovisual settings for this episode.</h5>
+
+  <%= simple_form_for @interview.becomes(Interview), defaults: { input_html: { id: 'audiovisual-options-form' }} do |f| %>
+
+    <%= f.input :audio_visual_download_options, label: "Audiovisual Download Options", collection: Account.audio_visual_download_options_array, prompt: false, selected: @interview.audio_visual_download_options %>
+    <%= f.input :audio_download_formats, label: "Audio Download Format Options", collection: Account.audio_download_format_options, prompt: false, selected: @interview.audio_download_formats %>
+    <%= f.input :max_resolution, label: "Video Resolution", collection: Account.video_resolution_options, prompt: false, selected: @interview.max_resolution %>
+
+  <% end %>
+
+  <%= link_to raw("Next &raquo; Real-time Prep with Guest(s)"), "javascript: submitOptions(#{@interview.id});", class: 'btn btn-primary' %>
+
+</div>
+
+
+<script>
+  $(function(){
+    window.INTERVIEW_ID = <%= @interview.id %>;
+    window.INTERVIEW_CODE = "<%= @interview.code %>";
+  });
+</script>

@@ -1,0 +1,79 @@
+<section class="slice">
+  <div class="container">
+    <div class="mb-md text-center">
+      <h3 class="heading h2 ">
+        Applicants
+        <div class='float-right'>
+          <%= link_to interview_path(@interview, _t: Time.now.to_i, _a: 'applicants', anchor: 'applicants'), class: "btn btn-secondary btn-icon-only btn-circle rounded-circle" do %>
+              <span class="btn-inner--icon"><i class="fa fa-refresh"></i></span>
+          <% end %>
+        </div>
+      </h3>
+      <div class="fluid-paragraph mt-3">
+        <p class="lead ">Here's guests who have applied to this interview.</p>
+      </div>
+    </div>
+    <div class="row row-grid">
+
+      <div class="col-lg-12">
+
+        <div class="card">
+
+          <% if applicants.exists? %>
+            <div class="table-responsive">
+              <table class="table table-sm table-flush table-fixed align-items-center">
+                <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Photo</th>
+                  <th>Primary Industry</th>
+                  <th>Expertises</th>
+                  <th>Promotions</th>
+                  <th>Topics</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% applicants.each do |applicant|  %>
+                  <% guest = applicant.guest %>
+                  <tr>
+                    <td>
+                      <span class="font-weight-bold text-sm">
+                        <%= link_to guest.full_name, guest_path(guest) %>
+                        </span>
+                    </td>
+                    <td>
+                      <%= render partial: 'shared/guest_avatar', locals: { guest: guest } %>
+                    </td>
+                    <td>
+                      <%= guest.profile&.primary_industry %>
+                    </td>
+                    <td>
+                      <%= guest.expertise_list %>
+                    </td>
+                    <td>
+                      <%= guest.promotion_list %>
+                    </td>
+                    <td>
+                      <%= guest.topic_list %>
+                    </td>
+                    <td>
+                      <%= link_to 'Invite', interview_guest_invite_path(interview_id: @interview.id, guest_id: guest.id, redirect_url: interview_path(@interview, anchor: 'applicants')), method: :post, class: 'btn btn-primary' %>
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class='text-center mt-4'>
+              <p>No applicants found!</p>
+              <p>Try to adjust interview options or wait for guests apply.</p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>

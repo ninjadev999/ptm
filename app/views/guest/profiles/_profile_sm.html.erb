@@ -1,0 +1,10 @@
+<div class="card profile-sm">
+		<div class="profile-img">
+			<%= render partial: 'shared/guest_avatar', locals: { guest: user, custom_size: '120x120' } %>
+		</div>
+    <div class="card-body">
+        <h6 class="card-title"><%= link_to user.full_name, guest_path(user) %></h6>
+        <p class="card-text"><%= user.profile&.bio %></p>
+        <!-- <a href="#" class="btn btn-sm btn-primary">Go somewhere</a> -->
+    </div>
+</div>

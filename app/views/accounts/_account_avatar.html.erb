@@ -1,0 +1,6 @@
+<% if account.logo.attached? && account.logo.variable? %>
+  <% size = local_assigns[:custom_size] || "120x120" %>
+  <%= image_tag account.logo.variant(combine_options: { resize: "#{size}>", extent: "#{size}", background: "white", gravity: "center"}), class: "rounded-border #{'avatar avatar-lg' if local_assigns[:custom_size].nil?} #{local_assigns[:custom_class] unless local_assigns[:custom_class].nil?}", title: account.name  %>
+<% else %>
+  <span class="avatar avatar-lg bg-blue <%= local_assigns[:custom_class] unless local_assigns[:custom_class].nil? %>"><%= account.decorate.initials %></span>
+<% end %>

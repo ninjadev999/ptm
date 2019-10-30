@@ -1,0 +1,54 @@
+<section class="slice">
+  <div class="container">
+    <div class="mb-md text-center">
+      <h3 class="heading h2 ">
+        Invite Podcasters
+        <div class='float-right'>
+          <%= link_to interview_path(@interview, _t: Time.now.to_i, _a: 'invite', anchor: 'invite'), class: "btn btn-secondary btn-icon-only btn-circle rounded-circle" do %>
+              <span class="btn-inner--icon"><i class="fa fa-refresh"></i></span>
+          <% end %>
+        </div>
+      </h3>
+      <div class="fluid-paragraph mt-3">
+        <p class="lead ">Here's podcasters that match your interview.</p>
+
+      </div>
+
+    </div>
+    <div class="row row-grid">
+
+      <div class="col-lg-12">
+        <div>
+          <button type="button" class="btn btn-sm btn-outline-primary btn-icon mb-3" data-toggle="collapse" data-target="#filters">
+              <span class="btn-inner--text">Filters</span>
+              <span class="btn-inner--icon"><i class="fa fa-sliders"></i></span>
+          </button>
+          <div class="collapse multi-collapse" id="filters">
+            <%= simple_form_for :filter, url: interview_accounts_path(@interview), method: :get, remote: true do |f| %>
+              <%= f.label :topic_list, 'Topics', class: 'form-control-label' %>
+              <%= f.autocomplete_field :topic_list, autocomplete_topic_name_profiles_path, 
+                :value => @interview.topic_list.to_s, :multiple => true, data: { max_tags: 10, only_available_tags: true } %>
+
+              <%= f.label :expertise_list, 'Expertises', class: 'form-control-label' %>
+              <%= f.autocomplete_field :expertise_list, autocomplete_expertise_name_profiles_path, 
+                :value => @interview.expertise_list.to_s, :multiple => true, data: { max_tags: 10, only_available_tags: true } %>
+
+              <%= f.label :promotion_list, 'Promotions', class: 'form-control-label' %>
+              <%= f.autocomplete_field :promotion_list, autocomplete_promotion_name_profiles_path, 
+                :value => @interview.promotion_list.to_s, :multiple => true, data: { max_tags: 10, only_available_tags: true } %>
+              <div class='text-right'>
+                <%= f.submit 'Search', class: 'btn btn-primary btn-circle mb-3' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="card invite_account_list">
+
+          <%= render partial: 'guest/interviews/accounts/invite_account_list', locals: { redirect_url: interview_path(@interview, anchor: 'invite') } %>
+
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</section>

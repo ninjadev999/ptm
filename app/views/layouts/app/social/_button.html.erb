@@ -1,0 +1,7 @@
+<% if local_assigns[:image_url].present? %>
+  <div class="social-share-button">
+    <% if local_assigns[:profile_url].present? %>
+      <%= link_to image_tag(local_assigns[:image_url], class: "ssb-icon", alt: local_assigns[:desc]), local_assigns[:profile_url], target: :_blank %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<section class="slice">
+  <div class="container">
+    <div class="row row-grid">
+
+      <div class="col">
+        <div class="page-inner-header mb-4">
+          <div class="row row-grid align-items-center">
+            <div class="col-lg-8">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <%- if current_user.accounts.count == 0 %>
+                    <h5 class="mb-1">Please create a podcast to continue</h5>
+                  <%- else %>
+                    <h5 class="mb-1">Fill in the form to create a new podcast</h5>
+                  <%-end %>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <%= render 'form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

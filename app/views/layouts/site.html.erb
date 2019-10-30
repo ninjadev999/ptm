@@ -1,0 +1,14 @@
+<div class='content'>
+  <div class='content-inside'>
+		<%= render 'layouts/theme/header' %>
+    <main>
+      <%= render_flash %>
+      <%= yield  %>
+    </main>
+  </div>
+  
+</div>
+<%= render 'layouts/theme/footer' %>
+
+
+<% parent_layout 'theme' %>

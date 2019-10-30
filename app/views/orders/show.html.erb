@@ -1,0 +1,44 @@
+<section class="pt-5 pt-lg-0 bg-secondary">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mt-lg-5 mb-5">
+        <div class="card">
+          <div class="card-body">
+            <div class="">
+              <h5><i class="far fa-user mr-2 mb-4"></i>Order progress</h5>
+              <% if !@order.canceled? %>
+                <div class="timeline timeline-one-side">
+                  <% @order.steps.steps.each do |step| %>
+                    <div class="timeline-block">
+                      <span class="timeline-step <%= 'border-info' if @order.steps.current_step == step %> <%= 'border-success' if @order.steps.current_step.index > step.index %>"></span>
+                      <div class="timeline-content">
+                        <h6><%= step.title %></h6>
+                        <p class="text-sm lh-160"><%= step.description %></p>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+                <% else %>
+                Order canceled.
+              <% end  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mt-lg-5 mb-5">
+        <a href="/orders/<%= @order.to_param %>/edit" class="btn btn-info mb-4">Edit order</a>
+        <a href="/orders/<%= @order.to_param %>" data-confirm="Are you sure? This can't be undone." data-method="delete" class="btn btn-danger mb-4">Cancel order</a>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="heading heading-5 strong-600">Shipping address</h5>
+            <h6 class="text-muted mb-4"><%= @order.address.name %></h6>
+            <p class="card-text">
+              <%= @order.address.street1 %><%= " #{@order.address.street2}" if @order.address.street2 %><br/>
+              <%= @order.address.city %>, <%= @order.address.state %> <%= @order.address.zip %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

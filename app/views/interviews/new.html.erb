@@ -1,0 +1,14 @@
+<section class="slice">
+  <div class="container">
+    <%= render 'form' %>
+  </div>
+</section>
+
+
+<% content_for :helphero_js do %>
+  <script type="text/javascript">
+      HelpHero.update({
+        interview_type: "<%= @interview.posting? ? 'B' : 'A' %>"
+      });
+  </script>
+<% end %>

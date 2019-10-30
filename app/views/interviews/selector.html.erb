@@ -1,0 +1,110 @@
+<h2 class="text-center mt-3">Select your option for purchase</h2>
+
+<div class="row mt-3">
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+
+    <div class="row">
+      <% @bundles.each do |bundle| %>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <a href="<%= @posting && bundle.single? ? '#' : url_for_bundle(bundle) %>" class="bundle-selector">
+            <div class="bundle-wrapper <%= 'disabled' if @posting && bundle.single? %>">
+              <div class="selection-heading mb-2"><%= pluralize(bundle.number_of_interviews, "interview") %></div>
+              <%= bundle.name %>
+              <br>
+              <div class="selector-price-per-interview mt-2 mb-2"><%= number_to_currency(bundle.price_per_interview_in_dollars) %> per interview</div>
+              <div class="selector-bundle-price mt-2"><%= number_to_currency(bundle.price_in_dollars) %> total</div>
+            </div>
+          </a>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <p class="text-center">Note: after interview creation, you are able to purchase individual addon seats as necessary</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- <div class="container">
+    <div class="col">
+        <div class="row" style="margin-top: 2em;">
+            <div class="col-lg-8 col-xl-6 text-center">
+                <div class="btn-group btn-group-lg" role="group" style="margin-left: 4em;"></div>
+                <h2 class="text-center">Basic Interview</h2>
+                <h3 class="text-center text-primary" style="font-size: 1.5em;">without Remote Studio</h3>
+                <ul class="list-unstyled text-center">
+                    <li></li>
+                    <li class="text-success"></li>
+                </ul><span></span>
+                <ul class="list-unstyled text-center">
+                    <li></li>
+                    <li class="text-success">Worldwide</li>
+                </ul>
+                <h2 class="display-1 text-monospace text-center text-primary" style="font-size: 4em;font-family: Lato, sans-serif;">$0.00</h2>
+                <div></div><a class="btn btn-link btn-lg text-center border-primary" role="button" href="<%= new_interview_path(needs_hardware: false) %>" style="font-size: 2em;padding-bottom: 9px;margin-bottom: 1em;">Choose me!</a>
+                <div></div>
+            </div>
+            <div class="col-lg-8 col-xl-6 text-center">
+                <div class="btn-group btn-group-lg" role="group" style="margin-left: 4em;"></div>
+                <h2 class="text-center">Premium Interview</h2>
+                <h3 class="text-center text-primary" style="font-size: 1.5em;">with Remote Studio</h3>
+                <ul class="list-unstyled text-center">
+                    <li></li>
+                    <li>Proprietry Remote Studio</li>
+                    <li class="text-success">US Only</li>
+                </ul>
+                <h2 class="display-1 text-monospace text-center text-primary" style="font-size: 4em;font-family: Lato, sans-serif;">$0.00</h2>
+                <div></div><span class="badge badge-lg badge-pill badge-info text-uppercase">Coming soon</span>
+                <div></div>
+            </div>
+            <div class="col">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+
+<!-- Start: Features Clean -->
+<div class="features-clean">
+    <div class="container">
+        <!-- Start: Intro -->
+        <div class="intro"></div>
+        <!-- End: Intro -->
+        <h2 class="text-center">Included in every interview:</h2>
+        <!-- Start: Features -->
+        <div class="row features">
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-microphone icon"></i>
+                <h3 class="name">Virtual Interview Space</h3>
+                <p class="description">Each package allows for a private recording space, but only the remote studio package offers hardware.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-clock-o icon"></i>
+                <h3 class="name">Scheduling</h3>
+                <p class="description">Schedule the date and time of the interview, hassle-free.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-list-alt icon"></i>
+                <h3 class="name">Multi-track Recording</h3>
+                <p class="description">Layer your podcast to make it more engaging.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="material-icons icon">storage</i>
+                <h3 class="name">Storage</h3>
+                <p class="description">Store your recordings for up to 12 months free.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="icon ion-android-textsms icon"></i>
+                <h3 class="name">Collaboration Texting</h3>
+                <p class="description">Write to your interviewee or podcast partner for better coordination.</p>
+            </div>
+            <div class="col-sm-6 col-lg-4 item"><i class="fa fa-phone icon"></i>
+                <h3 class="name">Technical support</h3>
+                <p class="description">Need help? We're there for you.</p>
+            </div>
+        </div>
+        <!-- End: Features -->
+    </div>
+</div>
+<!-- End: Features Clean -->

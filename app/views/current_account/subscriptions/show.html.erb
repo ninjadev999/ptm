@@ -1,0 +1,6 @@
+<h5>Subscription</h5>
+<% if @subscription.nil? || @subscription.free? %>
+You don't have an active subscription. <a href="/account/subscription" data-method="post">Create your subscription for $99</a>.
+<% else %>
+You have an active subscription. <a href="/account/subscription" data-method="delete">Cancel your subscription</a>.
+<% end %>

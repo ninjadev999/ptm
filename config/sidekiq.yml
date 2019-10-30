@@ -1,0 +1,10 @@
+development:
+  :concurrency: 5
+production:
+  :concurrency: 15
+:queues:
+  - default
+  - mailers
+  - mixpanel
+  - analytics
+  - notifications

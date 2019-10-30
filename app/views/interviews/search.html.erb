@@ -1,0 +1,44 @@
+<section class="slice">
+  <div class="container">
+
+    <% if @invites.exists? %>
+    <div class="row row-grid">
+      <div class="col-lg-12">
+        <div class="row card">
+          <%= render partial: 'interviews/index/invited_list' %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <% if @active_applicants.exists? %>
+    <div class="row row-grid">
+      <div class="col-lg-12">
+        <div class="row card">
+          <%= render partial: 'interviews/index/applied_list' %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    
+    <div class="mt-5 mb-md text-center">
+      <h3 class="heading h2 ">Search Solicited interviews</h3>
+      <div class="fluid-paragraph mt-3">
+        <p class="lead ">Here's solicited interviews that match your past interviews.</p>
+      </div>
+    </div>
+
+    <%= render partial: 'interviews/filter_condition' %>
+    
+  <div class='interview-list'>
+    <% if @interviews.exists? %>
+      <%= render partial: 'guest/interviews/interview', collection: @interviews %>
+    <% else %>
+      <div class='text-center mt-4'>
+        <p>No matching interviews found!</p>
+        <p>Try to visit later.</p>
+      </div>
+    <% end %>
+  </div>
+  </div>
+</section>

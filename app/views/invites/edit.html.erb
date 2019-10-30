@@ -1,0 +1,51 @@
+<div class="media align-items-center">
+  <div class="media-body">
+
+    <h5 class="mb-5 text-center"><%= @interview.account.admin.full_name %>'s invite is waiting for you!</h3>
+
+    <h6 class="mb-3 text-center">Podcast: <%= @interview.account.name %></h6>
+    <h6 class="mb-3 text-center">Interview Title: <%= @interview.name %></h6>
+
+  </div>
+</div>
+
+<div class="media align-items-center mb-5">
+  <div class="media-body text-center">
+    <h6 class='text-center'>Your confirmation status: <%= @invite.status.upcase %></h6>
+    <div class='mx-auto'>
+      <% unless @invite.declined? %>
+        <% unless @invite.confirmed? %>
+          <%= link_to "Confirm Appearance", confirm_invite_path(@invite.code, redirect_url: edit_invite_path(@invite.code)), method: :put, class: 'btn btn-sm btn-outline-success pr-3' %>
+        <% end %>
+        <%= link_to "Decline Appearance", decline_invite_path(@invite.code, redirect_url: edit_invite_path(@invite.code)), method: :put, class: 'btn btn-sm btn-outline-danger' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="media align-items-center mb-3">
+  <div class="media-body text-center">
+
+    <% unless user_signed_in? %>
+ 
+      <p class='text-center'>Create PTM account and accept/decline your invite. You need to sign up for an account to access the live interview page.</p>
+
+      <%= link_to set_password_account_setups_path, class: 'btn btn-lg btn-primary btn-info btn-icon-label' do %>
+        <span class="btn-inner--text">Join the PassTheMicrophone Network</span>
+        <span class="btn-inner--icon ml-3"><i class="fa fa-arrow-right"></i></span>
+      <% end %>
+
+    <% else %>
+
+      <p class='text-center'>You are already a member of PTM network. Go to interviews page and accept/decline your invite</p>
+
+      <%= link_to interviews_path, class: 'btn btn-lg btn-primary btn-info btn-icon-label' do %>
+        <span class="btn-inner--text">Go to interviews</span>
+        <span class="btn-inner--icon ml-3"><i class="fa fa-arrow-right"></i></span>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>
+
+

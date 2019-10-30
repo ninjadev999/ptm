@@ -1,0 +1,12 @@
+<section class="slice">
+  <div class="container">
+    <div class="row row-grid">
+
+      <%= render partial: 'layouts/theme/settings_sidebar' %>
+
+      <div class="col-lg-9">
+        <%= render partial: 'preferences/host_choose_plan', locals: { current: current_user.host_subscription&.plan_id, link_method: :update_host_plan_preferences_plans_path } %>
+      </div>
+    </div>
+  </div>
+</section>

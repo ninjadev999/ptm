@@ -1,0 +1,81 @@
+<%
+  guest = params[:guest].present?
+%>
+<div class="text-center mb-4 mt-5">
+  <h6 class="h3">Create a <%= guest ? 'Guest' : 'Host' %> account</h6>
+  <p class="text-muted mb-0">It's free and easy</p>
+</div>
+<span class="clearfix"></span>
+<!--
+<%= link_to '#', class: "btn btn-facebook btn-icon-label" do %>
+    <span class="btn-inner--icon"><i class="fa fa-facebook"></i></span>
+    <span class="btn-inner--text">Sign up with Facebook</span>
+<% end %>
+-->
+<div class='text-center'>
+  <%= link_to "/auth/linkedin?guest=#{guest}", class: "btn btn-twitter btn-icon-label" do %>
+      <span class="btn-inner--icon"><i class="fa fa-linkedin"></i></span>
+      <span class="btn-inner--text">Sign up with Linkedin</span>
+  <% end %>
+</div>
+
+<hr class="hr-text" data-content="or">
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="col-md-6 d-inline-block">
+      <%= f.input :first_name, label: "First Name", input_html: { class: "form-control", placeholder: "Mark" } %>
+    </div>
+    <div class="col-md-6 d-inline-block">
+      <%= f.input :last_name, label: "Last Name", input_html: { class: "form-control", placeholder: "Washington" } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :email, label: "Your email address", input_html: { class: "form-control", placeholder: "mark@coolpodcast.com" } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :password, label: "A good password", input_html: { class: "form-control", placeholder: "********" } %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.input :password_confirmation, label: "A good password again", input_html: { class: "form-control", placeholder: "********" } %>
+    </div>
+  </div>
+
+  <%= f.hidden_field :host, value: !guest %>
+  <%= f.hidden_field :guest, value: guest %>
+
+  <div class="my-4">
+    <span class="text-sm">By clicking "Create account", you agree to our <a href="/terms">Terms and Conditions</a> and <a href="/privacy_policy">Privacy Policy</a>.</span>
+  </div>
+  <div class="row align-items-center">
+    <div class="col-sm-7">
+      <button type="submit" class="btn btn-primary mb-3 mb-sm-0" data-disable-with="Creating...">Create account</button>
+    </div>
+    <div class="col-sm-5 text-sm-right small">
+      <div>
+        <% if guest %>
+          <%= link_to "Join as Host", choose_plan_host_account_setups_path %>
+        <% else %>
+          <%= link_to "Join as Guest", choose_plan_account_setups_path %>
+        <% end %>
+      </div>
+      <div>
+        <span class="d-sm-block d-md-inline">Already registered?</span>
+        <a href="/users/sign_in" class="font-weight-bold">Sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center mb-5 mt-3">
+    <div class="col-lg-12 col-md-12 text-sm-right">
+      <a href="<%= new_user_password_path %>" class="small font-weight-bold">Forgot your password or having trouble signing in?</a>
+    </div>
+  </div>
+
+<% end %>

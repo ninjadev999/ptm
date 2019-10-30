@@ -1,0 +1,27 @@
+<section class="slice">
+  <div class="container">
+
+  	<div class="alert alert-primary alert-shadow alert-dismissible fade show" role="alert">
+		    <strong>You profile is ready!</strong> Check how your profile looks like below.
+		    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		    </button>
+		</div>
+
+  	<div class="mb-md text-center mt-5">
+      <h3 class="heading h2 ">
+        <%= @user.full_name %> Profile
+      </h3>
+    </div>
+
+    <div class="row row-grid">
+      <%= render partial: 'guest/profiles/profile', locals: { user: @user } %>
+
+      <div class='text-center mt-5 col-12'>
+        <a class="btn btn-primary mb-4" href="<%= checkout_account_setups_path %>">Continue</a>
+        <a class="btn btn-outline-primary mb-4" href="<%= settings_account_setups_path %>">Edit profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+

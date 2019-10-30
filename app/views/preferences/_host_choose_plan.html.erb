@@ -1,0 +1,61 @@
+<% link_method = local_assigns[:link_method] || :select_plan_host_account_setups_path %>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="card card-pricing text-center px-3 mb-4 z-depth-3 <%= 'popular' if Plan.host_monthly_plan.id == local_assigns[:current] %>">
+            <div class="card-header py-4">
+                <h5 class="mb-4">Monthly</h5>
+                <h1 class="display-5 text-primary text-center"><%= Plan.host_monthly_plan.amount_str %></h1>
+                <span class="h6 text-muted">per month</span>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-4">
+                  <li> unlimited interviews </li>
+                </ul>
+                <%= link_to 'Choose plan', send(link_method, plan: Plan.host_monthly_plan.id), class: "btn btn-primary mb-3 #{'disabled' if Plan.host_monthly_plan.id == local_assigns[:current]}", method: :put %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-pricing text-center px-3 mb-4 z-depth-3 <%= 'popular' if Plan.host_yearly_plan.id == local_assigns[:current] %>">
+            <div class="card-header py-4">
+                <h5 class="mb-4">Yearly</h5>
+                <h1 class="display-5 text-primary text-center"><%= Plan.host_yearly_plan.amount_str %></h1>
+                <span class="h6 text-muted">per year</span>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-4">
+                  <li> unlimited interviews </li>
+                  <li> save $36/year </li>
+                </ul>
+                <%= link_to 'Choose plan', send(link_method, plan: Plan.host_yearly_plan.id), class: "btn btn-primary mb-3 #{'disabled' if Plan.host_yearly_plan.id == local_assigns[:current] }", method: :put %>
+            </div>
+        </div>
+    </div>
+<!--     <% unless user_signed_in? && current_user.bundle_itv_remaining > 0 %> -->
+        <div class="col-md-4">
+            <div class="card-pricing-per-interview card card-pricing text-center px-3 mb-4 z-depth-3">
+                <div class="card-header py-4">
+                    <h5 class="mb-4">A la carte</h5>
+                    <h1 class="display-5 text-primary text-center">$6.99</h1>
+                    <span class="h6 text-muted">per interview and up</span>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-4">
+                      <li> Great for new podcasters. </li>
+                      <li> 30 interviews for 6.99 per interview </li>
+                      <li> 10 interviews for 7.99 per interview </li>
+                    </ul>
+                    <%= link_to 'Choose plan', buy_interview_host_account_setups_path, class: "btn btn-primary mb-3 #{'disabled' if Plan.host_yearly_plan.id == local_assigns[:current] }", method: :get %>
+                </div>
+            </div>
+        </div>
+    <!-- <% end %> -->
+</div>
+
+<div class="col text-center">
+<% if current_user.blank? %>
+    <a href="/users/sign_up" class="font-weight-bold link-inversed">Try free trial</a>
+<% end %>
+</div>

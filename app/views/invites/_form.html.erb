@@ -1,0 +1,13 @@
+<%= simple_form_for @invite, {url: invites_path(interview_id: @interview)} do |f| %>
+  <input type="hidden" name="add_another" value="false" id="add-another" />
+  <%= f.input :name %>
+  <%= f.input :email %>
+
+  <%= f.submit(raw("Continue &nbsp; &raquo;&raquo;"), {class: 'btn btn-primary float-left mr-2'}) %>
+
+  <%= button_tag type: 'submit', class: "btn btn-outline-primary btn-icon ml-3", id: "invite-plus-button" do %>
+    <span class="btn-inner--text">Invite Another Guest</span>
+    <span class="btn-inner--icon"><i class="fa fa-plus-circle"></i></span>
+  <% end %>
+
+<% end %>

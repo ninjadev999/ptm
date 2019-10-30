@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-header border-0">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h6 class="mb-0">Upcoming Interviews</h6>
+      </div>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-sm table-flush align-items-center align-items-center">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Days until interview</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @interviews.each do |interview|  %>
+        <% invite = interview.invites.where(guest_id: current_user.id).first %>
+        <tr>
+          <td>
+            <span class="font-weight-bold text-sm">
+              <%= link_to interview.name, interview_path(interview) %>
+              </span>
+          </td>
+          <td>
+            <% if interview.starts_at.present? %>
+              <% diff_days = (interview.starts_at.to_i - Time.now.to_i) / 86400 %>
+              <%= diff_days > 0 ? "#{diff_days} days" : "past #{diff_days.abs} days ago" %>
+            <% else %>
+              None
+            <% end %>
+          </td>
+          <td>
+            <%= interview.starts_at.present? ? local_time(interview.starts_at) : 'Unscheduled' %>
+          </td>
+          <td>
+            <%= render partial: 'interviews/invite_status', locals: { invite: invite } %>
+          </td>
+          <td>
+            <% if invite.invited? %>
+              <%= link_to 'Confirm', confirm_invite_url(invite.code, redirect_url: interviews_path), method: :put, class: 'btn btn-sm btn-success pr-3' %>
+              <%= link_to 'Decline', decline_invite_url(invite.code, redirect_url: interviews_path), method: :put, class: 'btn btn-sm btn-danger' %>
+            <% end %>
+
+            <% if invite.confirmed? && !interview.ended? && within_twelve_hours?(interview.starts_at) %>
+              <%= link_to "Join Interview", live_interview_path(id: interview.code), class: 'btn btn-sm btn-primary' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>

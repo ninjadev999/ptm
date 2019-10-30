@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Social Sites</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Image url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% all_social_sites.each do |social_site| %>
+      <tr>
+        <td><%= social_site.name %></td>
+        <td><%= social_site.image_url %></td>
+        <td><%= link_to 'Show', social_site %></td>
+        <td><%= link_to 'Edit', edit_social_site_path(social_site) %></td>
+        <td><%= link_to 'Destroy', social_site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Social Site', new_social_site_path %>

@@ -1,0 +1,42 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+	font-family: roboto;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Lato;
+}
+
+.content{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.content-inside {
+  padding-bottom: $height-footer;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.hidden {
+  display: none;
+}
+.valign-center {
+  vertical-align: center;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.flash-container {
+  width: 100%;
+}

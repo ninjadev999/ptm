@@ -1,0 +1,44 @@
+<header class="align-items-center">
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="text-center">
+          <div class="btn-group btn-group-nav shadow" role="group" aria-label="Basic example">
+            <div class="btn-group" role="group">
+              <a href="/order_wizards/<%=@order.to_param %>/edit?step=1" class="btn btn-secondary btn-icon <%= 'active' if determined_step == 1 %>">
+                <span class="btn-inner--icon"><i class="fas fa-user"></i></span>
+                <span class="btn-inner--text d-none d-md-inline-block">Who</span>
+              </a>
+              <a href="/order_wizards/<%=@order.to_param %>/edit?step=2" class="btn btn-secondary btn-icon <%= 'active' if determined_step == 2 %>">
+                <span class="btn-inner--icon"><i class="fas fa-clock"></i></span>
+                <span class="btn-inner--text d-none d-md-inline-block">When</span>
+              </a>
+              <a href="/order_wizards/<%=@order.to_param %>/edit?step=3" class="btn btn-secondary btn-icon <%= 'active' if determined_step == 3 %>">
+                <span class="btn-inner--icon"><i class="fas fa-truck"></i></span>
+                <span class="btn-inner--text d-none d-md-inline-block">Address</span>
+              </a>
+              <a href="/order_wizards/<%=@order.to_param %>/edit?step=4" class="btn btn-secondary btn-icon <%= 'active' if determined_step == 4 %>">
+                <span class="btn-inner--icon"><i class="fas fa-check-double"></i></span>
+                <span class="btn-inner--text d-none d-md-inline-block">Double-check</span>
+              </a>
+              <a href="/order_wizards/<%=@order.to_param %>/edit?step=5" class="btn btn-secondary btn-icon <%= 'active' if determined_step == 5 %>">
+                <span class="btn-inner--icon"><i class="fas fa-receipt"></i></span>
+                <span class="btn-inner--text d-none d-md-inline-block">Confirmation</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<section class="slice slice-lg">
+  <div class="container">
+    <%= yield %>
+  </div>
+</section>
+
+<%= parent_layout 'app' %>

@@ -1,0 +1,14 @@
+.togglebutton + .btn-group {
+	display: block;
+
+	.btn {
+		padding: 0;
+		margin: 0.2rem;
+	  border-color: bisque;
+  	background-color: bisque;
+		&.active {
+			border-color: coral;
+    	background-color: coral;
+		}
+	}
+}

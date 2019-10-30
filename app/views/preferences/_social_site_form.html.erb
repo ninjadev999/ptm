@@ -1,0 +1,36 @@
+<%= simple_form_for @profile do |f| %>
+    
+    <% if @profile.errors.any? %>
+        <div id="error">
+          <p><%= @profile.errors.count %> Prevented this account from saving</p>
+          <ul>
+            <% @profile.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    
+    <table class="table align-items-center">
+      <thead>
+      <th>Social Name</th>
+      <th>Url</th>
+      </thead>
+      
+      <tbody id='profile_social_sites'>
+      <% if @profile.profile_social_sites.present? %>
+          <%= f.simple_fields_for :profile_social_sites do |profile_social_site| %>
+              <%= render 'preferences/social_site_fields', f: profile_social_site %>
+          <% end %>
+      <% else %>
+          <tr><th>no items</th></tr>
+      <% end %>
+      </tbody>
+    </table>
+    
+    <div class="form-actions">
+      <%= f.button :submit, 'Save', class: "btn btn-primary" %>
+      <%= link_to_add_association 'Add', f, :profile_social_sites, partial: 'preferences/social_site_fields', class: 'btn btn-info', data: { association_insertion_node: '#profile_social_sites', association_insertion_method: :append } %>
+    </div>
+    
+<% end %>

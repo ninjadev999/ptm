@@ -1,0 +1,107 @@
+<div class="card profile-card">
+  <div class="profile-card-avatar-container text-center">
+    <%= render partial: '/accounts/account_avatar', locals: { account: @account } %>
+  </div>
+  <div class="card-body">
+    <h4 class="card-title heading h4 text-center"><%= @account.name %></h4>
+    <p class="card-text text-left">
+      <%= @account.description.present? ? @account.description : 'No description' %>
+    </p>
+    <div class="row">
+      <div class="col col-lg-4">
+        <p><strong>Time Zone:</strong></p>
+      </div>
+      <div class="col col-lg-8 text-left">
+        <h6><%= @account.time_zone %></h6>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-lg-4">
+        <p><strong>Email:</strong></p>
+      </div>
+      <div class="col col-lg-8 text-left">
+        <h6><%= @account.email %></h6>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-lg-4">
+        <p><strong>Topics:</strong></p>
+      </div>
+      <div class="col col-lg-8 text-left">
+        <% if @account.most_topics.present? %>
+            <%= render partial: 'interviews/see_detail/topics', locals: {topics: @account.most_topics} %>
+        <% else %>
+          <h6>N/A</h6>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-lg-4">
+        <p><strong>Promotions:</strong></p>
+      </div>
+      <div class="col col-lg-8 text-left">
+        <% if @account.most_promotions.present? %>
+            <%= render partial: 'interviews/see_detail/promotions', locals: {promotions: @account.most_promotions} %>
+        <% else %>
+            <h6>N/A</h6>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-lg-4">
+        <p><strong>Expertises:</strong></p>
+      </div>
+      <div class="col col-lg-8 text-left">
+        <% if @account.most_expertises.present? %>
+            <%= render partial: 'interviews/see_detail/expertises', locals: {expertises: @account.most_expertises} %>
+        <% else %>
+            <h6>N/A</h6>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row align-middle">
+      <div class="col col-lg-8 align-middle">
+        <p><strong>Estimated Downloads per episode:</strong></p>
+      </div>
+      <div class="col col-lg-4 text-left align-middle">
+        <h6><%= @account.downloads_per_episode %></h6>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col col-lg-8">
+        <p><strong>Total number of social media followers:</strong></p>
+      </div>
+      <div class="col col-lg-4 text-left">
+        <h6><%= @account.social_media_followers %></h6>
+      </div>
+    </div>
+  
+    <div class="row">
+      <% @account.account_public_sites.each do |site| %>
+        <div class="col col-lg-4">
+          <p><strong><%= site.name %>:</strong></p>
+        </div>
+        <div class="col col-lg-8 text-left">
+          <%= link_to site.url, site.url, class: "h6", target: :_blank %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render partial: 'accounts/ratings/show_average_ratings', locals: { account: @account } %>
+    
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <%= render partial: '/accounts/social_buttons/form', locals: {profile_object: @account, desc: @account.name} %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+

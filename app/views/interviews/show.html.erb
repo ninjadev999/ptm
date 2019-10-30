@@ -1,0 +1,11 @@
+<%- if @interview.ended? %>
+  <%= render 'completed_interview' %>
+<%- else %>
+	<%- if @interview.posting? %>
+  	<%= render 'posted_interview' %>
+  <%- elsif @interview.guest_solicited? && guest? %>
+  	<%= render 'interviews/solicited/solicited_interview' %>
+  <%- else %>
+	  <%= render 'upcoming_interview' %>
+	 <%- end %>
+<%- end %>

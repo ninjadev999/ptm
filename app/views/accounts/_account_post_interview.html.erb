@@ -1,0 +1,66 @@
+<div class="container row post-interview-guest-panel mb-3 pt-3 pb-3">
+  <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 text-center">
+    <%= render partial: 'accounts/account_avatar', locals: { account: account, custom_size: '120x120' } %>
+  </div>
+  <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 guest-profile-post-interview">
+    <div class='host-name mb-2'><%= account.name %></div>
+    <div class='host-bio mb-1'><%= simple_format(truncate(account.description.present? ? account.description : 'No description' , length: 100)) %></div>
+    <% unless account.time_zone.blank? %>
+        <p><strong>Time Zone: </strong>
+          <b><%= account.time_zone %></b>
+        </p>
+    <% end %>
+    <% unless account.most_topics.empty? %>
+        <p>
+          <strong>Expertises: </strong>
+          <%= render partial: 'interviews/see_detail/expertises', locals: {expertises: account.most_expertises} %>
+        </p>
+    <% end %>
+    <% unless account.most_promotions.empty? %>
+        <p><strong>Promotions: </strong>
+          <%= render partial: 'interviews/see_detail/promotions', locals: {promotions: account.most_promotions} %>
+        </p>
+    <% end %>
+    <% unless account.most_topics.empty? %>
+        <p><strong>Topics: </strong>
+          <%= render partial: 'interviews/see_detail/topics', locals: {topics: account.most_topics} %>
+        </p>
+    <% end %>
+  </div>
+  
+  <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+    <div class="post-interview-rating-container">
+      <div class="rate-this mb-2">Rate this host</div>
+      
+      <div class="">
+        Host made me feel comfortable during interview
+      </div>
+      <div class="mb-2">
+        <%= rating_for @interview.account, 'comfortable', disable_after_rate: false, cancel: false %>
+      </div>
+      
+      <div class="">
+        Host interview technique
+      </div>
+      <div class="mb-2">
+        <%= rating_for  @interview.account, 'technique', disable_after_rate: false, cancel: false %>
+      </div>
+      
+      <div class="">
+        Host cared about my interests
+      </div>
+      <div class="mb-2">
+        <%= rating_for  @interview.account, 'interests', disable_after_rate: false, cancel: false %>
+      </div>
+  
+      <div class="">
+        I would recommend someone to do an interview with this show
+      </div>
+      <div class="mb-2">
+        <%= rating_for  @interview.account, 'recommend', disable_after_rate: false, cancel: false %>
+      </div>
+      
+    </div>
+  </div>
+
+</div>

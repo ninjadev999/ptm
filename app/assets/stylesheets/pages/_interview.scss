@@ -1,0 +1,489 @@
+.nav-item a.btn.btn-sm{
+  width: 200px;
+  display: inline-block !important;
+}
+.nav-item a .new-label{
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.nav-item a .new-label span{
+  position: relative;
+  content: 'NEW'
+}
+.nav-item:hover a .new-label span{
+  display: none;
+}
+.nav-item:hover a .new-label:after{
+  content: 'Manage Podcasts';
+}
+
+.name-link{
+  max-width: 400px;
+  overflow: hidden;
+}
+
+.side-card{
+  padding-bottom: 10px;
+}
+.room-controls {
+  padding: 1.5rem 1.5rem 0 1.5rem;
+}
+
+.my-video{
+  video { width: 100%; }
+  max-width: 150px;
+}
+
+.participant-video {
+  video {
+    width: 100%;
+    float: left;
+  }
+  max-width: 100%;
+  display: inline-flex;
+  padding: 1em 1em;
+  vertical-align: top;
+}
+
+.multiple-participant-video {
+  max-width: 100% !important;
+}
+
+.my-video-note {
+  font-style: italic;
+  font-size: .9em;
+  color: #ccc;
+}
+
+#data-stream{
+  height: 150px;
+  overflow: scroll;
+}
+
+.download-btn {
+  margin-bottom: 15px;
+  line-height: 1.5em;
+  width: 100% !important;
+  padding-top: .2em !important;
+  padding-bottom: .2em !important;
+}
+
+.download-btn-group{
+  text-align: center;
+}
+
+.media-type-heading {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.recording-type-heading {
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.post-interview-guest-panel {
+  border: 1px solid #e6e6e6;
+  border-radius: 15px;
+}
+.host-name {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+.host-bio {
+  font-style: italic;
+  font-size: 1em;
+}
+
+.host-bio p {
+  line-height: 1.2em;
+}
+.guest-profile-post-interview p {
+  font-size: .9em;
+  margin-bottom: .3em;
+}
+.post-interview-rating-container {
+  width: 100%;
+  padding: .8em 0 .8em .8em;
+  font-size: .8em !important;
+  border-radius: 15px;
+  background-color: rgb(246, 246, 246);
+}
+
+.rate-this {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.badge-tiny {
+  padding: .2em .2em .2em .2em;
+  font-size: 10px;
+}
+
+.red{
+  color: red;
+}
+.underlined {
+  text-decoration: underline;
+}
+.profile-pic{
+  height: 100px;
+  width: 100px;
+}
+
+.guest-profile{
+  margin-top: 30px;
+  line-height: 1.4em;
+}
+.mini-guest-profile{
+  line-height: 1em;
+}
+.header-row{
+  margin-top: 30px;
+}
+.interview-details{
+  line-height: 1.4em;
+}
+.remote-studio-info {
+  margin-top: .3em;
+  margin-bottom: .8em;
+}
+.hardware-selection-panel {
+  padding: 2em;
+  margin: 4em;
+  border-radius: 3em;
+  border: 2px solid #780001;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.hardware-selection-header {
+  margin-bottom: .5em;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #3F3F3F;
+}
+.hardware-selection-price {
+  font-size: 1.7em;
+  font-weight: bold;
+  color: #780001;
+  margin-bottom: .5em;
+}
+p.hardware-details {
+  color: #141414;
+}
+a.hardware-selector {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+.or-seperator {
+  margin-left: 2.5em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+h2.interview-name {
+  font-size: 2.4em;
+}
+h5.interview-title {
+  font-size: 1.1em;
+}
+.interview-show-label {
+  color: #141414;
+  font-weight: bold;
+  font-size: .8em;
+}
+.interview-show-content {
+  width: auto;
+  border-radius: 1em;
+  border: 1px solid #e6e6e6;
+  background-color: #f2f2f2;
+  margin-right: .5em;
+  padding: 1em 1em .8em 1em;
+
+  p {
+    margin: 0;
+  }
+}
+
+.interview-show-invitee {
+  width: auto;
+  border-radius: 2em;
+  border: 1px solid #e6e6e6;
+  background-color: #f2f2f2;
+  margin-right: .5em;
+  padding: .8em .8em .8em .8em;
+}
+
+.interview-invitee-name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.interview-invitee-email {
+  font-size: 1.1em;
+  color: #8c8c8c;
+}
+
+.field-heading {
+  color: #6C7685;
+  font-size: 1em;
+}
+
+.checkout-cart-heading {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #343A3F;
+}
+
+.checkout-cart {
+  width: auto;
+  border-radius: .6em;
+  border: 2px solid #333333;
+  background-color: #f2f2f2;
+  padding: 1em 1em 1em 1em;
+}
+
+.cart-line-item {
+  font-size: 1em;
+  color: #333333;
+}
+
+.bundle-line-item-price {
+  font-size: 1.2em;
+  color: #333333;
+}
+
+.cart-total-label {
+  font-size: 1.6em;
+}
+
+.cart-total {
+  font-weight: bold;
+  font-size: 1.6em;
+}
+
+.rate-interview .star {
+  float: right;
+}
+
+.round-account-logo {
+  border-radius: 50%;
+}
+
+.interviews-remaining {
+  background: #7E0005;
+  border-radius: 1em;
+  color: #fff;
+  font-size: 1.1em;
+  padding: .7em .7em .7em .7em;
+  text-align: center;
+}
+
+label.addon-seats-selection-radio {
+  display: block;
+}
+
+.addon-seats-selection {
+  border: 1px solid #e6e6e6;
+  margin-left: .5em;
+  margin-right: .5em;
+  text-align: center;
+  padding-top: 0;
+  padding-bottom: .4em;
+  border-radius: .8em;
+  background-color: #e6f7ff;
+  color: #333;
+  height: auto;
+  width: max-width;
+}
+
+.addon-seats-selector {
+  margin-top: -1em;
+  margin-bottom: .1em;
+  font-size: 1em;
+  vertical-align: middle;
+}
+
+.addon-seats-selection:hover {
+  cursor: pointer;
+  background-color: #b3ffb3;
+}
+
+.addon-seats-selected {
+  background-color: #b3ffb3;
+}
+
+.radio-addon-seats {
+}
+
+.addon-seats-price {
+  font-size: .9em;
+  font-style: italic;
+  padding-bottom: .4em;
+}
+
+.addon-seat-heading {
+  font-size: 1.1em;
+}
+.addon-seat-current-count {
+  font-size: 1.8em;
+}
+.addon-seat-notes {
+  font-size: .9em;
+}
+#addon-form-error-message {
+  border-radius: .5em;
+  background-color: #ff0000;
+  color: #fff;
+  font-size: .8em;
+  font-weight: bold;
+  padding: .6em .6em .6em .6em;
+  margin: .5em .5em .5em .5em;
+}
+
+.confirm-option-label {
+  color: #333333;
+  font-size: 105%;
+}
+
+a.reload-guests {
+  color: #999999;
+  font-size: 1.7em;
+  float: right;
+}
+
+.gateway-invites {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.ready {
+  background: #33cc00;
+  color: #fff;
+  border-radius: 1.2em;
+  padding: .5em .5em .5em 1em;
+}
+
+.not-ready {
+  background: #ff471a;
+  color: #fff;
+  border-radius: 1.2em;
+  padding: .5em .5em .5em 1em;
+}
+
+.overall-status {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.all-ready {
+  color: #33cc00;
+}
+
+.waiting-on-some {
+  color: #ff471a;;
+}
+
+.prep-step {
+  font-size: 1.4em;
+  color: #bfbfbf;
+  margin-bottom: 1em;
+}
+
+.prep-step-active {
+  color: #262626;
+}
+
+.step-border {
+  border: 1px solid #f2f2f2;
+  border-radius: 10px;
+  padding: .8em .8em .8em .8em;
+}
+
+h3.gateway-step {
+  font-size: 1.4em;
+  color: #262626;
+}
+
+.step-desc {
+  font-size: 1.2em;
+  color: #262626;
+}
+.step-completed {
+  color: #666666 !important;
+}
+.step-inactive {
+  color: #bfbfbf !important;
+}
+
+.active-blue {
+  color: #0066ff;
+}
+
+.completed-green {
+  color: #33cc00;
+}
+
+.table-responsive {
+  padding: 1.25rem 1.5rem;
+}
+
+#meter {
+  padding: .4em .4em;
+  border: 1px solid #ccc;
+}
+.webcam-test {
+  max-width: 100%;
+}
+.height-spacer-footer-fix {
+  clear: both;
+  display: block;
+  height: 400px;
+}
+
+// Responsive CSS Styles
+
+@media (min-width: 768px) {
+  .hardware-selection-panel {
+    height: 420px;
+  }
+}
+
+@media (min-width: 992px) {
+  .participant-video {
+    display: inline;
+  }
+
+  .multiple-participant-video {
+    max-width: 310px !important;
+    display: inline-block;
+  }
+}
+
+@media (max-width: 992px) {
+  .hardware-selection-panel {
+    margin-bottom: 1em;
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+}
+.interview-header {
+  position: relative;
+  z-index: 1;
+  transform: translateY(-50%);
+  margin-left: 10px;
+}
+
+.interview-post-date {
+  transform: translateY(30%);
+  padding-right: 30px;
+}
+
+.interview-card {
+  .card-body {
+    padding-top: 0;
+  }
+}

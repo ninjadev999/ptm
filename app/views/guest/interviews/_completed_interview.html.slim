@@ -1,0 +1,25 @@
+section.pt-5.pt-lg-0
+  .container.slice
+    .card
+      .card-body
+        .row
+          .col
+            h2.interview-name
+              i.fa.fa-microphone.mr-3
+              = @interview.name
+        .row
+          .col-md-12.mt-3
+            .container.interview-details.mb-4
+              .row
+                .col
+                  | Interview Completed on:
+                .col
+                  = local_time(@interview.completed_at)
+              .row
+                .col
+                  | Podcast:
+                .col
+                  = @interview.account.name
+
+            - @interview.invites.each do |invite|
+              = render partial: 'shared/invite', locals: { invite: invite }

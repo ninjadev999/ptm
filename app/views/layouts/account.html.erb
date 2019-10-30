@@ -1,0 +1,18 @@
+<div class='content'>
+  <div class='content-inside'>
+    <%= render_flash %>
+    <div class="container devise-container d-flex align-items-center">
+      <div class="col">
+        <div class="row justify-content-center">
+          <div class="col-md-12 col-lg-12">
+
+            <%= yield %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/app/footer' %>
+<% parent_layout 'theme' %>

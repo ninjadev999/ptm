@@ -1,0 +1,20 @@
+<tr>
+  <th scope="row"><span class="badge badge-lg badge-dot"><i class="bg-success"></i></span></th>
+  <td>
+    <i class="fas fa-calendar-alt mr-2"></i>
+    <span class="font-weight-bold text-dark"><%= order.interview_at %></span>
+  </td>
+  <td>#<%= order.to_param %></td>
+  <td><i class="fas fa-home mr-2"></i><%= order.address.to_s %></td>
+  <td><span class="badge" data-toggle="tooltip" title="title"><%= order.aasm_state %></span></td>
+  <td>
+    <div class="dropdown">
+      <a class="btn btn-sm btn-icon-only" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" href="/orders/<%= order.to_param %>"><i class="fas fa-file-archive text-muted"></i>See details</a>
+        <a class="dropdown-item" href="/orders/<%= order.to_param %>" data-method="delete" data-confirm="Are you sure you want to cancel this order?"><i class="fas fa-file-pdf text-muted"></i>Cancel</a>
+      </div>
+    </div>
+  </td>
+</tr>
+<tr class="table-divider"></tr>

@@ -1,0 +1,5 @@
+<% if @interviews.exists? %>
+	$('.interview-list').html('<%= escape_javascript(render partial: "guest/interviews/interview", collection: @interviews) %>');
+<% else %>
+	$('.interview-list').html("<div class='text-center mt-4'><p>No matching interviews found!</p><p>Try to visit later.</p></div>");
+<% end %>

@@ -1,0 +1,20 @@
+<section class="slice">
+  <div class="container col-lg-10 col-md-10">
+    <div class="mb-md text-center">
+      <h3 class="heading h2 ">
+        My Profile
+        <%= link_to preferences_settings_path, class: "btn btn-secondary btn-icon-only btn-circle rounded-circle" do %>
+          <span class="btn-inner--icon"><i class="fa fa-pencil"></i></span>
+        <% end %>
+      </h3>
+      <div class="mt-3">
+        <p class="lead ">Here's your public facing profile.</p>
+      </div>
+    </div>
+    <div class="row row-grid">
+      <div class="col-lg-8 col-md-8 col-xs-12 mx-auto">
+        <%= render partial: 'profile', locals: { user: @user } %>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,4 @@
+<%= simple_form_for @order, url: "/order_wizards/#{@order.to_param}", method: :put do |f| %>
+  <%= f.input :finalize, input_html: { value: '1' } %>
+  <%= f.submit "Next step" %>
+<% end %>

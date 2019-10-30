@@ -1,0 +1,11 @@
+<tr class='nested-fields'>
+  <td>
+    <%= f.input :public_site_id, collection: all_public_sites, label: false %>
+  </td>
+  <td>
+    <%= f.input :url, label: false %>
+  </td>
+  <td>
+    <%= link_to_remove_association raw('<span class="btn btn-secondary btn-icon-only btn-circle rounded-circle btn-inner--icon"><i class="fa fa-close"></i></span>'), f %>
+  </td>
+</tr>

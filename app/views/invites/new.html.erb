@@ -1,0 +1,25 @@
+<section class="slice">
+  <div class="container">
+    <div class="row row-grid">
+      <div class="col-lg-8">
+        <div class="media align-items-center">
+          <div class="media-body">
+
+            <% if @interview.incomplete? %>
+              <h2 class="text-center">Who Are You Interviewing?</h2>
+
+              <h5 class="mb-1">Step 2 of 3: Invite Interviewee</h3>
+              <p class="text-muted mb-0">Send an invitation to a potential interviewee. Upon successful submission, you will have the option of inviting additional interviewees. Click the "Skip/Continue" button to proceed to the payment confirmation page.</p>
+            <% else %>
+              <h2><a href="<%= interview_path(@interview) %>"><%= @interview.name %></a> &raquo; Send Invites</h2>
+            <% end %>
+          </div>
+        </div>
+
+        <%= render 'form' %>
+
+      </div>
+    </div>
+  </div>
+</section>
+

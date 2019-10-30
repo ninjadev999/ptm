@@ -1,0 +1,154 @@
+<section class="slice">
+  <div class="container">
+    <div class="row row-grid">
+      <div class="col-lg-12">
+        <div>
+          <div class="page-inner-header mb-4">
+            <h5 class="mb-1">My saved addresses</h5>
+            <p class="text-muted mb-0">Use one of your saved addresses.</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-flush mb-0 align-items-center">
+              <tbody>
+              <% @addresses.each_with_index do |address, i| %>
+              <tr>
+                <td>
+                  <div class="custom-control custom-checkbox">
+                    <input type="radio" class="custom-control-input" name="address_id" id="tbl-addresses-check-<%=i %>">
+                    <label class="custom-control-label" for="tbl-addresses-check-<%=i%>"></label>
+                  </div>
+                </td>
+                <td>
+                  <span class="font-weight-600 text-dark"><%= address.nickname %></span>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center">
+                    <p class="mb-0 text-muted text-limit text-sm"><%= address.street1 %>, <%= address.city %>, <%= address.state %> <%= address.zip %></p>
+                  </div>
+                </td>
+                <td>
+                  <div class="dropdown">
+                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-ellipsis-v"></i></a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" href="#"><i class="far fa-user text-muted"></i>See profile</a>
+                      <a class="dropdown-item" href="#"><i class="far fa-envelope text-muted"></i>Send message</a>
+                      <a class="dropdown-item" href="#"><i class="far fa-trash-alt text-muted"></i>Remove</a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <% end %>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+
+      <%= simple_form_for :address, url: "/addresses" do |f| %>
+        <div class="mt-5 pt-5 delimiter-top">
+
+          <div class="page-inner-header mb-4">
+            <h5 class="mb-1">Add new address</h5>
+
+            <p class="text-muted mb-0">Fill in your address info for upcoming orders or payments.</p>
+
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <%= f.input :nickname, required: false %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.input :name %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :phone_number %>
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-md-12">
+              <%= f.input :street1, :label => "Address line 1" %>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="col-md-6">
+              <%= f.input :street2, :label => "Address line 2", required: false %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :street3, :label => "Address line 3", required: false %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <%= f.input :city %>
+            </div>
+            <div class="col-md-6">
+              <%= f.input :state %>
+            </div>
+            <div class="col-md-2">
+              <%= f.input :zip %>
+            </div>
+          </div>
+          <%= f.input :country, as: :hidden, value: 'US' %>
+          <%= f.submit %>
+        </div>
+        <% end %>
+        <!-- Delivery method -->
+        <div class="mt-5 pt-5 delimiter-top">
+
+          <div class="page-inner-header mb-4">
+            <h5 class="mb-1">Shipping method</h5>
+
+            <p class="text-muted mb-0">Fill in your address info for upcoming orders or payments.</p>
+
+          </div>
+
+          <div class="row row-grid mt-4">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" name="shipping-method" class="custom-control-input" id="shipping-standard">
+                        <label class="custom-control-label text-dark font-weight-bold" for="shipping-standard">Standard Delivery</label>
+                      </div>
+                    </div>
+                    <div class="col-4 text-right">
+                      <span class="h6">Free</span>
+                    </div>
+                  </div>
+                  <p class="text-muted text-sm mt-3 mb-0">Estimated 10-20 days shipping. Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-8">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" name="shipping-method" class="custom-control-input" id="shipping-fast">
+                        <label class="custom-control-label text-dark font-weight-bold" for="shipping-fast">Fast Delivery</label>
+                      </div>
+                    </div>
+                    <div class="col-4 text-right">
+                      <span class="h6">$25 USD</span>
+                    </div>
+                  </div>
+                  <p class="text-muted text-sm mt-3 mb-0">Estimated 3-5 days shipping. Lorem Ipsum is simply dummy text of the printing and typesetting.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 text-right">
+          <button type="button" class="btn btn-link text-sm text-dark font-weight-bold">Return to shop</button>
+          <button type="button" class="btn btn-sm btn-primary">Next step</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

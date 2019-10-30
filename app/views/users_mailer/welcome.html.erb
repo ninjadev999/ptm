@@ -1,0 +1,15 @@
+<h5>Hi <%= @user.full_name %></h5>
+<br><br>
+<p>
+  We're delighted to have you on board.
+</p>
+<p>
+You have <%= pluralize(NUM_FREE_INTERVIEWS, 'free interview') %> and you can purchase more paid interviews. Sign in to your account here: <%= link_to new_user_session_url, new_user_session_url %>
+</p>
+<p>
+If you have any questions regarding your account, please contact us at support@passthemicrophone.com.
+</p>
+
+<br><br>
+Thanks,<br>
+Pass the Mic

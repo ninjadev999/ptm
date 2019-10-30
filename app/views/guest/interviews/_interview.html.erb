@@ -1,0 +1,59 @@
+<div class="row mb-5 justify-content-md-center">
+    <div class="col-md-10">
+        <div class="card interview-card">
+            <div class='d-flex justify-content-between'>
+                <div class="interview-header btn btn-icon btn-seconday shadow border-0 text-primary bg-white">
+                    <span class="btn-inner--icon"><i class="fa fa-podcast"></i></span>
+                    <span class="btn-inner--text d-none d-md-inline-block">
+                        <% if interview.guest_solicited? %>
+                            <%= link_to "#{interview.guest.full_name}", guest_path(interview.user), class: 'text-danger' %>
+                        <% else %>
+                            <%= link_to "#{interview.account.name}", interview_show_account_path(interview), class: 'text-danger' %>
+                        <% end %>
+                        : <%= interview.name %>
+                    </span>
+                </div>
+                <div class='interview-post-date'>
+                    <%= local_time(interview.created_at) %>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <h6 class="heading heading-sm strong-400 text-muted mb-4">
+                    <% if interview.guest_solicited? %>
+                        <%= interview.user.profile&.bio  %>
+                    <% else %>
+                        <%= interview.account.description.blank? ? 'No description' : interview.account.description  %>
+                    <% end %>
+                </h6>
+
+                <p class="card-text"><%= interview.ideal_guest_desc %></p>
+                <%= render partial: 'interviews/see_detail/topics', locals: { topics: interview.topic_list.first(3) }
+                %>
+            </div>
+            <div class="card-footer">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div>
+                            <% if policy(interview.becomes(Interview)).apply? %>
+                                <%= link_to 'Apply', interview_apply_path(interview), class: 'btn btn-sm btn-primary', method: :post %>
+                            <% end %>
+                            <%= link_to 'See details', interview_see_detail_path(interview), class: 'btn btn-sm btn-info' %>
+                        </div>
+                    </div>
+                    <div class="col text-right text-xs-right">
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item">
+                                <i class="fa fa-user text-muted mr-1" title='Confirmed guests'></i><%= interview.invites.confirmed.count %>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="fa fa-eye text-muted mr-1" title='Applicants'></i><%= interview.members.count %>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<!-- <h2 class="text-center mt-3">Select your option for purchase</h2> -->
+
+<div class="row mt-3">
+
+  <div class="col-lg-12 col-md-12 col-sm-12">
+
+    <div class="row">
+      <% @bundles.each do |bundle| %>
+        <% if bundle.number_of_interviews != 1 %>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+              <%= link_to select_bundle_host_account_setups_path(bundle_id: bundle.id), class: "bundle-selector", method: :put do %>
+                <div class="bundle-wrapper <%= 'disabled' if @posting && bundle.single? %>">
+                  <div class="selection-heading mb-2"><%= pluralize(bundle.number_of_interviews, "interview") %></div>
+                  <%= bundle.name %>
+                  <br>
+                  <div class="selector-price-per-interview mt-2 mb-2">
+                    <%= number_to_currency(bundle.price_per_interview_in_dollars) %> per interview
+                  </div>
+                  <div class="selector-bundle-price mt-2">
+                    <%= number_to_currency(bundle.price_in_dollars) %> total
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <p class="text-center">Note: after interview creation, you are able to purchase individual addon seats as necessary</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,20 @@
+<%= simple_form_for [@podcast_invite] do |form| %>
+    <% if @podcast_invite.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@podcast_invite.errors.count, "error") %> prohibited this pod_cast_admin_invitation from being saved:</h2>
+
+          <ul>
+            <% @podcast_invite.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= form.input :account_id, as: :hidden %>
+    <%= form.input :name, label: "Name", required: true %>
+    <%= form.input :email, label: "Email", required: true %>
+    <%= form.input :account_id, :as => :hidden, :input_html => { :value => params[:account_id] } %>
+
+    <%= form.button :submit, class: "btn btn-primary btn-rounded" %>
+<% end %>
